@@ -17,15 +17,15 @@ read rootDrive
 
 #echo "efi partition"
 #parted /dev/$installDrive mkpart primary fat32 3MB 515MB
-#efiDrive=$installDrive"1"
+efiDrive=$installDrive"p1"
 
 #echo "swap partition"
 #parted /dev/$installDrive mkpart primary linux-swap 515MB 2563MB
-#swapDrive=$installDrive"2"
+swapDrive=$installDrive"p2"
 
 #echo "root partition"
 #parted /dev/$installDrive mkpart primary btrfs 2563MB 100%
-#rootDrive=$installDrive"3"
+rootDrive=$installDrive"p3"
 
 #echo "format partitions"
 #mkfs.vfat -F 32 /dev/$efiDrive
