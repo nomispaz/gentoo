@@ -19,7 +19,7 @@ echo "update @world set so that updates and new use-flags can be used"
 emerge --ask --verbose --update --deep --newuse @world
 
 echo "adding first use-flags"
-echo 'USE=-elogind initramfs redistributable systemd' >> /etc/portage/make.conf
+echo 'USE=-elogind initramfs redistributable systemd sysv-utils' >> /etc/portage/make.conf
 
 echo "set CPU_FLAGS"
 emerge --ask app-portage/cpuid2cpuflags
@@ -49,12 +49,49 @@ https://wiki.gentoo.org/wiki/Systemd#Installation
 emerge --ask sys-kernel/gentoo-sources
 ln -sf /proc/self/mounts /etc/mtab
 
-eselect kernel set 1
-genkernel --install all
 
-echo "creating initramfs with dracut"
+echo "installing dracut"
 mkdir -p /etc/dracut.conf.d/
 echo "# Dracut modules to add to the default" >> /etc/dracut.conf.d/usrmount.conf
 echo 'add_dracutmodules+=" usrmount "' >>  /etc/dracut.conf.d/usrmount.conf
-echo "installing dracut"
 emerge --ask sys-kernel/dracut
+
+eselect kernel set 1
+genkernel --install all
+
+echo "generate fstab"
+rootDrive=$(blkid | sed -nE 's/.*\/dev\/vda3: +UUID=(.*)+UUID_SUB.*$/\1/p')
+
+echo "UUID=$rootDrive / noatime,compress=zstd,subvol=root 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /home noatime,compress=zstd,subvol=home 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /data noatime,compress=zstd,subvol=data 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /var/log noatime,compress=zstd,subvol=var_log 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /var/cache noatime,compress=zstd,subvol=var_cache 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /.snapshots noatime,compress=zstd,subvol=snapshots 0 0" >> /etc/fstab
+
+echo "install dhcp clien"
+emerge --ask net-misc/dhcpcd
+
+echo "set root pw"
+passwd
+
+echo "initialize systemd"
+systemd-firstboot --prompt --setup-machine-id
+
+#skip fileindexing for now
+#emerge --ask sys-apps/mlocate
+
+echo "enable time synchronisation"
+systemctl enable systemd-timesyncd.service
+
+echo "install btrfs-progs"
+emerge --ask sys-fs/btrfs-progs
+
+echo "install wlan tools"
+emerge --ask net-wireless/iw net-wireless/wpa_supplicant
+
+echo "installing grub"
+echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
+emerge --ask sys-boot/grub
+grub-install --target=x86_64-efi --efi-directory=/boot/efi
+grub-mkconfig -o /boot/grub/grub.cfg
