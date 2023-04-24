@@ -18,13 +18,15 @@ emerge --sync
 echo "update @world set so that updates and new use-flags can be used"
 emerge --ask --verbose --update --deep --newuse @world
 
-#skipping use-variables and use default
+echo "adding first use-flags"
+echo 'USE=initramfs redistributable' >> /etc/portage/make.conf
 
 echo "set CPU_FLAGS"
 emerge --ask app-portage/cpuid2cpuflags
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 
-# skipping licenses for now
+echo "add licenses to make.conf"
+echo 'ACCEPT_LICENSE="@FREE @GPL-COMPATIBLE @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
 
 echo "set locales and time"
 ln -sf ../usr/share/zoneinfo/Europe/Berlin /etc/localtime
@@ -36,8 +38,14 @@ echo "KEYMAP=de-latin1" >> /etc/vconsole.conf
 echo "XMGneo15Arch" >> /etc/hostname
 locale-gen
 
-echo "select locale with eselect locale set xxx"
-eselect locale list
-
 echo "reload the environment"
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+
+echo "install linux-firmware"
+emerge --ask sys-kernel/linux-firmware
+
+echo "installing the kernel"
+https://wiki.gentoo.org/wiki/Systemd#Installation
+emerge --ask sys-kernel/gentoo-sources
+ln -sf /proc/self/mounts /etc/mtab
+
