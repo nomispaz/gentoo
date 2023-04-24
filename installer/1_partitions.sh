@@ -47,3 +47,4 @@ echo "mount root partition"
 mount --mkdir -o noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
 swapon /dev/$swapDrive
 
+cd /mnt/gentoo
