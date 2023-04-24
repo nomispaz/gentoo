@@ -15,8 +15,8 @@ emerge --sync
 # eselect profile list
 # eselect profile set xxx
 
-echo "update @world set so that updates and new use-flags can be used"
-emerge --ask --verbose --update --deep --newuse @world
+#echo "update @world set so that updates and new use-flags can be used"
+#emerge --ask --verbose --update --deep --newuse @world
 
 echo "adding first use-flags"
 echo 'USE=-elogind initramfs redistributable systemd sysv-utils' >> /etc/portage/make.conf
