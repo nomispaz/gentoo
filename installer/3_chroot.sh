@@ -19,7 +19,7 @@ echo "update @world set so that updates and new use-flags can be used"
 emerge --ask --verbose --update --deep --newuse @world
 
 echo "adding first use-flags"
-echo 'USE=initramfs redistributable' >> /etc/portage/make.conf
+echo 'USE=-elogind initramfs redistributable systemd' >> /etc/portage/make.conf
 
 echo "set CPU_FLAGS"
 emerge --ask app-portage/cpuid2cpuflags
@@ -49,3 +49,12 @@ https://wiki.gentoo.org/wiki/Systemd#Installation
 emerge --ask sys-kernel/gentoo-sources
 ln -sf /proc/self/mounts /etc/mtab
 
+eselect kernel set 1
+genkernel --install all
+
+echo "creating initramfs with dracut"
+mkdir -p /etc/dracut.conf.d/
+echo "# Dracut modules to add to the default" >> /etc/dracut.conf.d/usrmount.conf
+echo 'add_dracutmodules+=" usrmount "' >>  /etc/dracut.conf.d/usrmount.conf
+echo "installing dracut"
+emerge --ask sys-kernel/dracut
