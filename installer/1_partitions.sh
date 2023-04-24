@@ -48,3 +48,4 @@ mount --mkdir -o noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
 swapon /dev/$swapDrive
 
 cd /mnt/gentoo
+echo "next step: get wget stage_3 tarball"
