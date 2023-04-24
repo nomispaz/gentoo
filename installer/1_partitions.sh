@@ -9,25 +9,28 @@
 echo "show devices"
 lsblk -l
 
-echo "set install drive to: "
-read installDrive
+#echo "set install drive to: "
+#read installDrive
 
-echo "efi partition"
-parted /dev/$installDrive mkpart primary fat32 3MB 515MB
-efiDrive=$installDrive"1"
+echo "set root drive to: "
+read rootDrive
 
-echo "swap partition"
-parted /dev/$installDrive mkpart primary linux-swap 515MB 2563MB
-swapDrive=$installDrive"2"
+#echo "efi partition"
+#parted /dev/$installDrive mkpart primary fat32 3MB 515MB
+#efiDrive=$installDrive"1"
 
-echo "root partition"
-parted /dev/$installDrive mkpart primary btrfs 2563MB 100%
-rootDrive=$installDrive"3"
+#echo "swap partition"
+#parted /dev/$installDrive mkpart primary linux-swap 515MB 2563MB
+#swapDrive=$installDrive"2"
 
-echo "format partitions"
-mkfs.vfat -F 32 /dev/$efiDrive
-mkswap /dev/$swapDrive
-mkfs.btrfs /dev/$rootDrive
+#echo "root partition"
+#parted /dev/$installDrive mkpart primary btrfs 2563MB 100%
+#rootDrive=$installDrive"3"
+
+#echo "format partitions"
+#mkfs.vfat -F 32 /dev/$efiDrive
+#mkswap /dev/$swapDrive
+#mkfs.btrfs /dev/$rootDrive
 
 echo "mount installDrive to /mnt"
 mount -o noatime,compress=zstd /dev/$rootDrive /mnt
