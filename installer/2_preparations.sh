@@ -12,7 +12,7 @@ tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 #current stage: set compile options. Use standard settings for now
 #nano -w /mnt/gentoo/etc/portage/make.conf
 echo "set makeopts to threads in VM"
-echo 'MAKEOPTS="-j4"' >> /etc/portage/make.conf
+echo 'MAKEOPTS="-j8"' >> /etc/portage/make.conf
 
 echo "select download mirrors"
 mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
