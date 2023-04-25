@@ -48,6 +48,7 @@ umount /mnt
 
 echo "mount root partition"
 mount --mkdir -o noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
+mount --mkdir /dev/$efiDrive /mnt/gentoo/boot/efi
 swapon /dev/$swapDrive
 
 cd /mnt/gentoo
