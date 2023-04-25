@@ -48,7 +48,7 @@ echo "install linux-firmware"
 emerge --ask sys-kernel/linux-firmware
 
 echo "installing the kernel"
-https://wiki.gentoo.org/wiki/Systemd#Installation
+#https://wiki.gentoo.org/wiki/Systemd#Installation
 emerge --ask sys-kernel/gentoo-sources
 ln -sf /proc/self/mounts /etc/mtab
 
