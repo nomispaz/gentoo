@@ -52,4 +52,4 @@ mount --mkdir /dev/$efiDrive /mnt/gentoo/boot/efi
 swapon /dev/$swapDrive
 
 cd /mnt/gentoo
-echo "next step: get wget stage_3 tarball. Then run 2_install.sh"
+echo "next step: get wget stage_3 tarball. Then run /home/gentoo/gentoo/install/2_preparations.sh. Never leave /mnt/gentoo!"
