@@ -56,15 +56,17 @@ emerge --ask sys-kernel/dracut
 eselect kernel set 1
 genkernel --install all
 
+dracut -f
+
 echo "generate fstab"
 rootDrive=$(blkid | sed -nE 's/.*\/dev\/vda3: +UUID=(.*)+UUID_SUB.*$/\1/p')
 
-echo "UUID=$rootDrive / noatime,compress=zstd,subvol=root 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /home noatime,compress=zstd,subvol=home 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /data noatime,compress=zstd,subvol=data 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /var/log noatime,compress=zstd,subvol=var_log 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /var/cache noatime,compress=zstd,subvol=var_cache 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /.snapshots noatime,compress=zstd,subvol=snapshots 0 0" >> /etc/fstab
+echo "UUID=$rootDrive / noatime,compress=zstd,subvol=/root 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /home noatime,compress=zstd,subvol=/home 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /data noatime,compress=zstd,subvol=/data 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /var/log noatime,compress=zstd,subvol=/var_log 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /var/cache noatime,compress=zstd,subvol=/var_cache 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /.snapshots noatime,compress=zstd,subvol=/snapshots 0 0" >> /etc/fstab
 
 echo "install dhcp clien"
 emerge --ask net-misc/dhcpcd
