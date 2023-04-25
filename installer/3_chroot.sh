@@ -60,6 +60,7 @@ echo 'add_dracutmodules+=" usrmount "' >>  /etc/dracut.conf.d/usrmount.conf
 emerge --ask sys-kernel/dracut
 
 eselect kernel set 1
+emerge --ask sys-kernel/genkernel
 genkernel --install all
 
 dracut -f
