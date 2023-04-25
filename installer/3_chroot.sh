@@ -2,6 +2,12 @@ echo "if anything happens, it should be able to continue from here"
 source /etc/profile
 export PS1="(chroot) ${PS1}"
 
+blkid
+echo "mount boot partition"
+echo "enter efi partition"
+read efiDrive
+mount --mkdir /dev/vda1 /boot/$efiDrive
+
 echo "choose install profile"
 eselect profile list
 
@@ -59,7 +65,10 @@ genkernel --install all
 dracut -f
 
 echo "generate fstab"
-rootDrive=$(blkid | sed -nE 's/.*\/dev\/vda3: +UUID=(.*)+UUID_SUB.*$/\1/p')
+blkid
+echo "enter root partition"
+read rootDrive
+rootDrive=$(blkid | sed -nE 's/.*\/dev\/$rootDrive: +UUID=(.*)+UUID_SUB.*$/\1/p')
 
 echo "UUID=$rootDrive / noatime,compress=zstd,subvol=/root 0 0" >> /etc/fstab
 echo "UUID=$rootDrive /home noatime,compress=zstd,subvol=/home 0 0" >> /etc/fstab
