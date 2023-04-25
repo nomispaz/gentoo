@@ -2,9 +2,6 @@ echo "if anything happens, it should be able to continue from here"
 source /etc/profile
 export PS1="(chroot) ${PS1}"
 
-echo "mount boot partition"
-mount --mkdir /dev/vda1 /boot/efi
-
 echo "choose install profile"
 eselect profile list
 
