@@ -33,5 +33,6 @@ mount --make-rslave /mnt/gentoo/dev
 mount --bind /run /mnt/gentoo/run
 mount --make-slave /mnt/gentoo/run 
 
-echo "enter chroot environment"
+cp /home/gentoo/gentoo/installer/3_chroot.sh /mnt/gentoo
+echo "enter chroot environment. Next step: run 3_chroot.sh"
 chroot /mnt/gentoo /bin/bash 
