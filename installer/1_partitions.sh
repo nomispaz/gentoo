@@ -9,18 +9,18 @@
 echo "show devices"
 lsblk -l
 
-#echo "set install drive to: "
+echo "set install drive to: "
 read installDrive
 
-#echo "efi partition"
+echo "efi partition"
 #parted /dev/$installDrive mkpart primary fat32 3MB 515MB
 read efiDrive
 
-#echo "swap partition"
+echo "swap partition"
 #parted /dev/$installDrive mkpart primary linux-swap 515MB 2563MB
 read swapDrive
 
-#echo "root partition"
+echo "root partition"
 #parted /dev/$installDrive mkpart primary btrfs 2563MB 100%
 read rootDrive
 
