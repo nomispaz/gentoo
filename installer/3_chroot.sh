@@ -6,7 +6,7 @@ blkid
 echo "mount boot partition"
 echo "enter efi partition"
 read efiDrive
-mount --mkdir /dev/vda1 /boot/$efiDrive
+mount --mkdir /dev/$efiDrive /boot/efi
 
 echo "choose install profile"
 eselect profile list
@@ -19,7 +19,7 @@ emerge --sync
 # eselect profile set xxx
 
 #echo "update @world set so that updates and new use-flags can be used"
-#emerge --ask --verbose --update --deep --newuse @world
+emerge --ask --verbose --update --deep --newuse @world
 
 echo "adding first use-flags"
 echo 'USE="-elogind initramfs redistributable systemd sysv-utils"' >> /etc/portage/make.conf
