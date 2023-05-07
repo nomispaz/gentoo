@@ -10,10 +10,7 @@ echo "show devices"
 lsblk -l
 
 #echo "set install drive to: "
-#read installDrive
-
-echo "set root drive to: "
-read rootDrive
+read installDrive
 
 #echo "efi partition"
 #parted /dev/$installDrive mkpart primary fat32 3MB 515MB
