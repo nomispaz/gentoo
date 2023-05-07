@@ -48,4 +48,5 @@ mount --mkdir -o noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
 swapon /dev/$swapDrive
 
 cd /mnt/gentoo
-echo "next step: get wget stage_3 tarball. Then run /home/gentoo/gentoo/install/2_preparations.sh. Never leave /mnt/gentoo!"
+wget "https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20230430T170359Z/stage3-amd64-desktop-systemd-20230430T170359Z.tar.xz"
+echo "Run /home/gentoo/gentoo/install/2_preparations.sh. Never leave /mnt/gentoo!"
