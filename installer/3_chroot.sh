@@ -47,11 +47,13 @@ env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 echo "install linux-firmware"
 emerge --ask sys-kernel/linux-firmware
 
+echo "install btrfs-progs"
+emerge --ask sys-fs/btrfs-progs
+
 echo "installing the kernel"
 #https://wiki.gentoo.org/wiki/Systemd#Installation
 emerge --ask sys-kernel/gentoo-sources
 ln -sf /proc/self/mounts /etc/mtab
-
 
 echo "installing dracut"
 mkdir -p /etc/dracut.conf.d/
@@ -93,9 +95,6 @@ systemd-firstboot --prompt --setup-machine-id
 echo "enable time synchronisation"
 systemctl enable systemd-timesyncd.service
 
-echo "install btrfs-progs"
-emerge --ask sys-fs/btrfs-progs
-
 echo "install wlan tools"
 emerge --ask net-wireless/iw net-wireless/wpa_supplicant
 
@@ -107,5 +106,5 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 #skip efi bootmgr for now
 
-echo "next steps: cd, umount -l /mnt/gentoo/dev{/shm,/pts,}, umount -R /mnt/gentoo, reboot"
+echo "next steps: check fstab, cd, umount -l /mnt/gentoo/dev{/shm,/pts,}, umount -R /mnt/gentoo, reboot"
 exit
