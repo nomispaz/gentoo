@@ -3,10 +3,6 @@ source /etc/profile
 export PS1="(chroot) ${PS1}"
 
 blkid
-echo "mount boot partition"
-echo "enter efi partition"
-read efiDrive
-mount --mkdir /dev/$efiDrive /boot/efi
 
 echo "generate fstab"
 echo "enter root partition"
@@ -19,7 +15,6 @@ echo "UUID=$rootDrive /data noatime,compress=zstd,subvol=/data 0 0" >> /etc/fsta
 echo "UUID=$rootDrive /var/log noatime,compress=zstd,subvol=/var_log 0 0" >> /etc/fstab
 echo "UUID=$rootDrive /var/cache noatime,compress=zstd,subvol=/var_cache 0 0" >> /etc/fstab
 echo "UUID=$rootDrive /.snapshots noatime,compress=zstd,subvol=/snapshots 0 0" >> /etc/fstab
-
 
 echo "choose install profile"
 eselect profile list
@@ -43,6 +38,8 @@ echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 
 echo "add licenses to make.conf"
 echo 'ACCEPT_LICENSE="@FREE @GPL-COMPATIBLE @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
+echo "add grub platform"
+echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
 
 echo "set locales and time"
 ln -sf ../usr/share/zoneinfo/Europe/Berlin /etc/localtime
@@ -99,12 +96,22 @@ echo "install wlan tools"
 emerge --ask net-wireless/iw net-wireless/wpa_supplicant
 
 echo "installing grub"
-echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
 emerge --ask sys-boot/grub
 grub-install --target=x86_64-efi --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 
 #skip efi bootmgr for now
+
+echo "create user and set password"
+echo "Enter username: "
+read user
+useradd -m --create-home $user
+#usermod -aG sys,wheel,users,rfkill,$user,libvirt $user
+usermod -aG sys,wheel,users,rfkill,$user $user
+passwd $user
+
+echo "Defaults targetpw # Ask for the password of the target user" >> /etc/sudoers
+echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
 
 echo "next steps: check fstab, cd, umount -l /mnt/gentoo/dev{/shm,/pts,}, umount -R /mnt/gentoo, reboot"
 exit
