@@ -17,8 +17,8 @@ echo 'MAKEOPTS="-j8"' >> /etc/portage/make.conf
 #use german mirrors
 echo 'GENTOO_MIRRORS="http://ftp.agdsn.de/gentoo https://ftp.agdsn.de/gentoo rsync://ftp.agdsn.de/gentoo https://ftp.gwdg.de/pub/linux/gentoo/ http://ftp.gwdg.de/pub/linux/gentoo/ ftp://ftp.gwdg.de/pub/linux/gentoo/ rsync://ftp.gwdg.de/gentoo/ https://ftp.uni-hannover.de/gentoo/ http://ftp.uni-hannover.de/gentoo/ ftp://ftp.uni-hannover.de/gentoo/ https://packages.hs-regensburg.de/gentoo-distfiles/ http://packages.hs-regensburg.de/gentoo-distfiles/ rsync://packages.hs-regensburg.de/gentoo-distfiles/ https://linux.rz.ruhr-uni-bochum.de/download/gentoo-mirror/ http://linux.rz.ruhr-uni-bochum.de/download/gentoo-mirror/ ftp://linux.rz.ruhr-uni-bochum.de/gentoo-mirror/ rsync://linux.rz.ruhr-uni-bochum.de/gentoo https://ftp.halifax.rwth-aachen.de/gentoo/ http://ftp.halifax.rwth-aachen.de/gentoo/ ftp://ftp.halifax.rwth-aachen.de/gentoo/ rsync://ftp.halifax.rwth-aachen.de/gentoo/ https://ftp.tu-ilmenau.de/mirror/gentoo/ http://ftp.tu-ilmenau.de/mirror/gentoo/ ftp://ftp.tu-ilmenau.de/mirror/gentoo/ rsync://ftp.tu-ilmenau.de/gentoo/ https://ftp.fau.de/gentoo http://ftp.fau.de/gentoo ftp://ftp.fau.de/gentoo rsync://ftp.fau.de/gentoo https://ftp-stud.hs-esslingen.de/pub/Mirrors/gentoo/ http://ftp-stud.hs-esslingen.de/pub/Mirrors/gentoo/ ftp://ftp-stud.hs-esslingen.de/pub/Mirrors/gentoo/ rsync://ftp-stud.hs-esslingen.de/gentoo/"' >> /etc/portage/make.conf
 
-echo "select download mirrors"
-mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
+#echo "select download mirrors"
+#mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
 
 echo "generate ebase reporitory"
 mkdir --parents /mnt/gentoo/etc/portage/repos.conf
