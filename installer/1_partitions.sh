@@ -38,11 +38,11 @@ echo "unmount installDrive"
 umount /mnt
 
 echo "mount subvolumes"
-mount --mkdir -o noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
-mount --mkdir -o noatime,compress=zstd,subvol=home /dev/$rootDrive /mnt/gentoo/home
-mount --mkdir -o noatime,compress=zstd,subvol=data /dev/$rootDrive /mnt/gentoo/data
-mount --mkdir -o noatime,compress=zstd,subvol=var /dev/$rootDrive /mnt/gentoo/var
-mount --mkdir -o noatime,compress=zstd,subvol=snapshots /dev/$rootDrive /mnt/gentoo/.snapshots
+mount --mkdir -t btrfs -o defaults,noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
+mount --mkdir -t btrfs -o defaults,noatime,compress=zstd,subvol=home /dev/$rootDrive /mnt/gentoo/home
+mount --mkdir -t btrfs -o defaults,noatime,compress=zstd,subvol=data /dev/$rootDrive /mnt/gentoo/data
+mount --mkdir -t btrfs -o defaults,noatime,compress=zstd,subvol=var /dev/$rootDrive /mnt/gentoo/var
+mount --mkdir -t btrfs -o defaults,noatime,compress=zstd,subvol=snapshots /dev/$rootDrive /mnt/gentoo/.snapshots
 
 echo "mount efi"
 mount --mkdir /dev/$efiDrive /mnt/gentoo/boot/efi
