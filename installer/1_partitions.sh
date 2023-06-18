@@ -32,15 +32,22 @@ btrfs subvolume create /mnt/root
 btrfs subvolume create /mnt/home
 btrfs subvolume create /mnt/data
 btrfs subvolume create /mnt/snapshots
-btrfs subvolume create /mnt/var_log
-btrfs subvolume create /mnt/var_cache
+btrfs subvolume create /mnt/var
 
 echo "unmount installDrive"
 umount /mnt
 
-echo "mount root partition"
+echo "mount subvolumes"
 mount --mkdir -o noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
+mount -o noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
+mount --mkdir -o noatime,compress=zstd,subvol=home /dev/$rootDrive /mnt/gentoo/home
+mount --mkdir -o noatime,compress=zstd,subvol=data /dev/$rootDrive /mnt/gentoo/data
+mount --mkdir -o noatime,compress=zstd,subvol=snapshots /dev/$rootDrive /mnt/gentoo/.snapshots
+mount --mkdir -o noatime,compress=zstd,subvol=var_log /dev/$rootDrive /mnt/gentoo/var
 
-cd /mnt/gentoo/
+echo "mount efi"
+mount --mkdir /dev/$efiDrive /mnt/gentoo/boot/efi
+
+cd /mnt/gentoo
 wget "https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20230611T170207Z/stage3-amd64-desktop-systemd-20230611T170207Z.tar.xz"
 echo "Run /home/gentoo/gentoo/install/2_preparations.sh. Never leave /mnt/gentoo!"
