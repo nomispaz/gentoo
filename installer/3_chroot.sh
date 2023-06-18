@@ -62,8 +62,8 @@ emerge --ask sys-fs/btrfs-progs
 
 echo "installing the kernel"
 #https://wiki.gentoo.org/wiki/Systemd#Installation
-emerge --ask sys-kernel/gentoo-sources
-ln -sf /proc/self/mounts /etc/mtab
+#emerge --ask sys-kernel/gentoo-sources
+#ln -sf /proc/self/mounts /etc/mtab
 
 echo "installing dracut"
 mkdir -p /etc/dracut.conf.d/
@@ -71,9 +71,11 @@ echo "# Dracut modules to add to the default" >> /etc/dracut.conf.d/usrmount.con
 echo 'add_dracutmodules+=" usrmount "' >>  /etc/dracut.conf.d/usrmount.conf
 emerge --ask sys-kernel/dracut
 
-eselect kernel set 1
-emerge --ask sys-kernel/genkernel
-genkernel --menuconfig --btrfs --virtio all
+#eselect kernel set 1
+#emerge --ask sys-kernel/genkernel
+#genkernel --menuconfig --btrfs --virtio all
+
+emerge --ask sys-kernel/gentoo-kernel-bin
 
 dracut -f
 
