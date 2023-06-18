@@ -11,7 +11,7 @@ mount --mkdir /dev/$efiDrive /boot/efi
 echo "generate fstab"
 echo "enter root partition"
 read rootDev
-rootDrive=blkid -s UUID -o value /dev/$rootDev
+rootDrive=$(blkid -s UUID -o value /dev/$rootDev)
 
 echo "UUID=$rootDrive / noatime,compress=zstd,subvol=/root 0 0" >> /etc/fstab
 echo "UUID=$rootDrive /home noatime,compress=zstd,subvol=/home 0 0" >> /etc/fstab
