@@ -16,17 +16,12 @@ echo "efi partition"
 #parted /dev/$installDrive mkpart primary fat32 3MB 515MB
 read efiDrive
 
-echo "swap partition"
-#parted /dev/$installDrive mkpart primary linux-swap 515MB 2563MB
-read swapDrive
-
 echo "root partition"
 #parted /dev/$installDrive mkpart primary btrfs 2563MB 100%
 read rootDrive
 
 #echo "format partitions"
 #mkfs.vfat -F 32 /dev/$efiDrive
-#mkswap /dev/$swapDrive
 #mkfs.btrfs /dev/$rootDrive
 
 echo "mount installDrive to /mnt"
@@ -45,7 +40,6 @@ umount /mnt
 
 echo "mount root partition"
 mount --mkdir -o noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
-swapon /dev/$swapDrive
 
 cd /mnt/gentoo/
 wget "https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20230611T170207Z/stage3-x32-systemd-mergedusr-20230611T170207Z.tar.xz"
