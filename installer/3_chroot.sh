@@ -15,9 +15,6 @@ echo "UUID=$rootDrive /data noatime,compress=zstd,subvol=/data 0 0" >> /etc/fsta
 echo "UUID=$rootDrive /var noatime,compress=zstd,subvol=/var 0 0" >> /etc/fstab
 echo "UUID=$rootDrive /.snapshots noatime,compress=zstd,subvol=/snapshots 0 0" >> /etc/fstab
 
-echo "choose install profile"
-eselect profile list
-
 echo "update ebuild repo"
 emerge --sync
 
