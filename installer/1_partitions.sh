@@ -39,7 +39,6 @@ umount /mnt
 
 echo "mount subvolumes"
 mount --mkdir -o noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
-mount -o noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
 mount --mkdir -o noatime,compress=zstd,subvol=home /dev/$rootDrive /mnt/gentoo/home
 mount --mkdir -o noatime,compress=zstd,subvol=data /dev/$rootDrive /mnt/gentoo/data
 mount --mkdir -o noatime,compress=zstd,subvol=snapshots /dev/$rootDrive /mnt/gentoo/.snapshots
