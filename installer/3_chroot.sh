@@ -9,11 +9,11 @@ echo "enter root partition"
 read rootDev
 rootDrive=$(blkid -s UUID -o value /dev/$rootDev)
 
-echo "UUID=$rootDrive / noatime,compress=zstd,subvol=/root 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /home noatime,compress=zstd,subvol=/home 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /data noatime,compress=zstd,subvol=/data 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /var noatime,compress=zstd,subvol=/var 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /.snapshots noatime,compress=zstd,subvol=/snapshots 0 0" >> /etc/fstab
+echo "UUID=$rootDrive / defaults,noatime,compress=zstd,subvol=root 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /home defaults,noatime,compress=zstd,subvol=home 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /data defaults,noatime,compress=zstd,subvol=data 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /var defaults,noatime,compress=zstd,subvol=var 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /.snapshots defaults,noatime,compress=zstd,subvol=snapshots 0 0" >> /etc/fstab
 
 echo "update ebuild repo"
 emerge --sync
