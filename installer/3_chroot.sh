@@ -8,6 +8,19 @@ echo "enter efi partition"
 read efiDrive
 mount --mkdir /dev/$efiDrive /boot/efi
 
+echo "generate fstab"
+echo "enter root partition"
+read rootDev
+rootDrive=blkid -s UUID -o value /dev/$rootDev
+
+echo "UUID=$rootDrive / noatime,compress=zstd,subvol=/root 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /home noatime,compress=zstd,subvol=/home 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /data noatime,compress=zstd,subvol=/data 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /var/log noatime,compress=zstd,subvol=/var_log 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /var/cache noatime,compress=zstd,subvol=/var_cache 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /.snapshots noatime,compress=zstd,subvol=/snapshots 0 0" >> /etc/fstab
+
+
 echo "choose install profile"
 eselect profile list
 
@@ -66,19 +79,6 @@ emerge --ask sys-kernel/genkernel
 genkernel --install --btrfs --virtio all
 
 dracut -f
-
-echo "generate fstab"
-blkid
-echo "enter root partition"
-read rootDev
-rootDrive=blkid -s UUID -o value /dev/$rootDev
-
-echo "UUID=$rootDrive / noatime,compress=zstd,subvol=/root 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /home noatime,compress=zstd,subvol=/home 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /data noatime,compress=zstd,subvol=/data 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /var/log noatime,compress=zstd,subvol=/var_log 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /var/cache noatime,compress=zstd,subvol=/var_cache 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /.snapshots noatime,compress=zstd,subvol=/snapshots 0 0" >> /etc/fstab
 
 echo "install dhcp clien"
 emerge --ask net-misc/dhcpcd
