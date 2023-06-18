@@ -73,7 +73,7 @@ emerge --ask sys-kernel/dracut
 
 eselect kernel set 1
 emerge --ask sys-kernel/genkernel
-genkernel --install --btrfs --virtio all
+genkernel --menuconfig --btrfs --virtio all
 
 dracut -f
 
