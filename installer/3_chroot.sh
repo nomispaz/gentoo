@@ -70,8 +70,8 @@ dracut -f
 echo "generate fstab"
 blkid
 echo "enter root partition"
-read rootDrive
-rootDrive=$(blkid | sed -nE 's/.*\/dev\/$rootDrive: +UUID=(.*)+UUID_SUB.*$/\1/p')
+read rootDev
+rootDrive=blkid -s UUID -o value /dev/$rootDev
 
 echo "UUID=$rootDrive / noatime,compress=zstd,subvol=/root 0 0" >> /etc/fstab
 echo "UUID=$rootDrive /home noatime,compress=zstd,subvol=/home 0 0" >> /etc/fstab
