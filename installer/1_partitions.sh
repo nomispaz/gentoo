@@ -31,8 +31,8 @@ echo "create subvolumes"
 btrfs subvolume create /mnt/root
 btrfs subvolume create /mnt/home
 btrfs subvolume create /mnt/data
-btrfs subvolume create /mnt/snapshots
 btrfs subvolume create /mnt/var
+btrfs subvolume create /mnt/snapshots
 
 echo "unmount installDrive"
 umount /mnt
@@ -41,8 +41,8 @@ echo "mount subvolumes"
 mount --mkdir -o noatime,compress=zstd,subvol=root /dev/$rootDrive /mnt/gentoo
 mount --mkdir -o noatime,compress=zstd,subvol=home /dev/$rootDrive /mnt/gentoo/home
 mount --mkdir -o noatime,compress=zstd,subvol=data /dev/$rootDrive /mnt/gentoo/data
+mount --mkdir -o noatime,compress=zstd,subvol=var /dev/$rootDrive /mnt/gentoo/var
 mount --mkdir -o noatime,compress=zstd,subvol=snapshots /dev/$rootDrive /mnt/gentoo/.snapshots
-mount --mkdir -o noatime,compress=zstd,subvol=var_log /dev/$rootDrive /mnt/gentoo/var
 
 echo "mount efi"
 mount --mkdir /dev/$efiDrive /mnt/gentoo/boot/efi
