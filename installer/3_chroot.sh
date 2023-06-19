@@ -9,18 +9,19 @@ echo "enter root partition"
 read rootDev
 rootDrive=$(blkid -s UUID -o value /dev/$rootDev)
 
-echo "UUID=$rootDrive / defaults,noatime,compress=zstd,subvol=root 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /home defaults,noatime,compress=zstd,subvol=home 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /data defaults,noatime,compress=zstd,subvol=data 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /var defaults,noatime,compress=zstd,subvol=var 0 0" >> /etc/fstab
-echo "UUID=$rootDrive /.snapshots defaults,noatime,compress=zstd,subvol=snapshots 0 0" >> /etc/fstab
+echo "UUID=$rootDrive / btrfs defaults,noatime,compress=zstd,subvol=root 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /home btrfs defaults,noatime,compress=zstd,subvol=home 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /data btrfs defaults,noatime,compress=zstd,subvol=data 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /var btrfs defaults,noatime,compress=zstd,subvol=var 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /.snapshots btrfs defaults,noatime,compress=zstd,subvol=snapshots 0 0" >> /etc/fstab
 
 echo "update ebuild repo"
 emerge --sync
 
 #currently no checkup of installation profiles. default for the stage-tarball is used"
 # eselect profile list
-# eselect profile set xxx
+# currently plasma, systemd is 10
+eselect profile set 10
 
 #echo "update @world set so that updates and new use-flags can be used"
 #emerge --ask --verbose --update --deep --newuse @world
@@ -87,6 +88,8 @@ systemd-firstboot --prompt --setup-machine-id
 #skip fileindexing for now
 #emerge --ask sys-apps/mlocate
 
+#install plasma
+emerge kde-plasma/plasma-meta
 echo "enable time synchronisation"
 systemctl enable systemd-timesyncd.service
 
