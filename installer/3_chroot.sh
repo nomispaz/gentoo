@@ -59,7 +59,7 @@ echo 'add_dracutmodules+=" usrmount "' >>  /etc/dracut.conf.d/usrmount.conf
 
 #install system
 #emerge     kde-plasma/plasma-meta   
-emerge \
+emerge --autounmask --oneshot \
 sys-kernel/linux-firmware \
 sys-kernel/gentoo-kernel-bin \
 sys-fs/btrfs-progs \
@@ -69,6 +69,7 @@ net-misc/networkmanager \
 net-wireless/iwd \
 net-wireless/wpa_supplicant \
 sys-boot/grub \
+sys-boot/os-prober \
 sys-boot/efibootmgr \
 sys-libs/timezone-data \
 dev-vcs/git \
@@ -107,6 +108,48 @@ app-antivirus/clamav \
 net-print/cups \
 sys-auth/polkit \
 sys-fs/exfatprogs \
+www-client/firefox-bin \
+net-firewall/firewalld \
+net-print/gutenprint \
+net-print/hplip \
+sys-fs/mtpfs \
+sys-apps/hwinfo \
+net-fs/nfs-utils \
+sys-fs/ntfs3g \
+app-forensics/rkhunter \
+net-misc/rsync \
+app-arch/unrar \
+app-arch/unzip \
+gui-libs/xdg-desktop-portal-hyprland \
+gui-libs/xdg-desktop-portal \
+app-shells/zsh \
+app-shells/zsh-completions \
+app-shells/gentoo-zsh-completions \
+dev-util/meld \
+kde-apps/kompare \
+sys-block/gparted \
+x11-misc/sddm \
+app-misc/screenfetch \
+sys-power/cpupower \
+app-backup/snapper \
+gui-wm/hyprland \
+x11-misc/qt5ct \
+media-libs/libva \
+gnome-extra/nm-applet \
+gui-apps/wofi \
+gui-apps/waybar \
+media-sound/pavucontrol \
+x11-misc/dunst \
+gui-apps/swaylock \
+sci-libs/libqalculate \
+gui-apps/swaybg \
+app-misc/ranger \
+media-gfx/w3mimgfb \
+x11-misc/xsel \
+net-misc/chrony \
+app-forensics/lynis
+
+#TODO: app-misc/brightnessctl, fonts, pamixer
 
 
 
@@ -160,6 +203,7 @@ systemctl enable systemd-timesyncd.service
 systemctl enable wireplumber.service
 systemctl enable acpid.service
 systemctl enable bluetooth.service
+systemctl enable chronyd.service
 
 echo "next steps: check fstab, cd, umount -l /mnt/gentoo/dev{/shm,/pts,}, umount -R /mnt/gentoo, reboot"
 exit
