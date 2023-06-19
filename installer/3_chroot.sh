@@ -157,9 +157,6 @@ app-forensics/lynis
 #skip fileindexing for now
 #emerge sys-apps/mlocate
 
-echo "installing the kernel"
-emerge sys-kernel/gentoo-kernel-bin
-
 #https://wiki.gentoo.org/wiki/Systemd#Installation
 #emerge sys-kernel/gentoo-sources
 #ln -sf /proc/self/mounts /etc/mtab
@@ -170,9 +167,6 @@ emerge sys-kernel/gentoo-kernel-bin
 
 dracut -f
 
-echo "set root pw"
-passwd
-
 echo "initialize systemd"
 systemd-firstboot --prompt --setup-machine-id
 
@@ -180,7 +174,8 @@ echo "installing grub"
 grub-install --target=x86_64-efi --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 
-#skip efi bootmgr for now
+echo "set root pw"
+passwd
 
 echo "create user and set password"
 echo "Enter username: "
