@@ -23,11 +23,22 @@ emerge --sync
 # currently plasma, systemd is 10; only systemd is 22
 eselect profile set 22
 
-#echo "update @world set so that updates and new use-flags can be used"
-emerge --ask --verbose --update --deep --newuse @world
 
 echo "adding first use-flags"
 echo 'USE="-elogind initramfs redistributable systemd sysv-utils"' >> /etc/portage/make.conf
+
+echo "adding use-flags for amd64 Testing for some packages
+echo "x11-terms/kitty ~amd64" >> /etc/portage/package.accept_keywords
+echo "gui-wm/hyprland ~amd64" >> /etc/portage/package.accept_keywords
+echo "gui-apps/waybar ~amd64" >> /etc/portage/package.accept_keywords
+echo "dev-libs/hyprland-protocols ~amd64" >> /etc/portage/package.accept_keywords
+
+echo "adding use-flags to packages"
+echo "gui-apps/waybar experimental" >> /etc/portage/package.use
+
+
+#echo "update @world set so that updates and new use-flags can be used"
+emerge --ask --verbose --update --deep --newuse @world
 
 echo "set CPU_FLAGS"
 emerge app-portage/cpuid2cpuflags
@@ -59,7 +70,7 @@ echo 'add_dracutmodules+=" usrmount "' >>  /etc/dracut.conf.d/usrmount.conf
 
 #install system
 #emerge     kde-plasma/plasma-meta   
-emerge --autounmask --oneshot \
+emerge \
 sys-kernel/linux-firmware \
 sys-kernel/gentoo-kernel-bin \
 sys-fs/btrfs-progs \
@@ -133,6 +144,7 @@ app-misc/screenfetch \
 sys-power/cpupower \
 app-backup/snapper \
 gui-wm/hyprland \
+dev-libs/hyprland-protocols \
 x11-misc/qt5ct \
 media-libs/libva \
 gnome-extra/nm-applet \
@@ -150,8 +162,10 @@ net-misc/chrony \
 app-forensics/lynis
 
 #TODO: app-misc/brightnessctl, fonts, pamixer
-
-
+#local ebuilds:
+#https://gitweb.gentoo.org/repo/proj/guru.git/diff/gui-libs/xdg-desktop-portal-hyprland/xdg-desktop-portal-hyprland-0.4.0.ebuild?id=e2f022b1a006b60083858b076ef8270d069b168b
+#https://gitweb.gentoo.org/repo/proj/guru.git/diff/app-misc/brightnessctl/brightnessctl-0.5.1.ebuild?id=a4289cc59e1f6230e0c237c755926d4adaa23dca
+#add nvidia use flag to hyprland
 
 
 #skip fileindexing for now
