@@ -51,33 +51,29 @@ locale-gen
 echo "reload the environment"
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
-echo "install linux-firmware"
-emerge sys-kernel/linux-firmware
-
-echo "install btrfs-progs"
-emerge sys-fs/btrfs-progs
-
-echo "installing the kernel"
-#https://wiki.gentoo.org/wiki/Systemd#Installation
-#emerge sys-kernel/gentoo-sources
-#ln -sf /proc/self/mounts /etc/mtab
-
-echo "installing dracut"
+echo "configuring dracut"
 mkdir -p /etc/dracut.conf.d/
 echo "# Dracut modules to add to the default" >> /etc/dracut.conf.d/usrmount.conf
 echo 'add_dracutmodules+=" usrmount "' >>  /etc/dracut.conf.d/usrmount.conf
-emerge -sys-kernel/dracut
+
+#install system
+emerge sys-kernel/linux-firmware sys-fs/btrfs-progs sys-kernel/dracut net-misc/dhcpcd kde-plasma/plasma-meta net-wireless/iw net-wireless/wpa_supplicant sys-boot/grub
+
+#skip fileindexing for now
+#emerge sys-apps/mlocate
+
+echo "installing the kernel"
+emerge sys-kernel/gentoo-kernel-bin
+
+#https://wiki.gentoo.org/wiki/Systemd#Installation
+#emerge sys-kernel/gentoo-sources
+#ln -sf /proc/self/mounts /etc/mtab
 
 #eselect kernel set 1
 #emerge sys-kernel/genkernel
 #genkernel --menuconfig --btrfs --virtio all
 
-emerge sys-kernel/gentoo-kernel-bin
-
 dracut -f
-
-echo "install dhcp clien"
-emerge net-misc/dhcpcd
 
 echo "set root pw"
 passwd
@@ -85,19 +81,10 @@ passwd
 echo "initialize systemd"
 systemd-firstboot --prompt --setup-machine-id
 
-#skip fileindexing for now
-#emerge sys-apps/mlocate
-
-#install plasma
-emerge kde-plasma/plasma-meta
 echo "enable time synchronisation"
 systemctl enable systemd-timesyncd.service
 
-echo "install wlan tools"
-emerge net-wireless/iw net-wireless/wpa_supplicant
-
 echo "installing grub"
-emerge sys-boot/grub
 grub-install --target=x86_64-efi --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 
