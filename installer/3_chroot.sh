@@ -30,7 +30,7 @@ echo "adding first use-flags"
 echo 'USE="-elogind initramfs redistributable systemd sysv-utils"' >> /etc/portage/make.conf
 
 echo "set CPU_FLAGS"
-emerge --ask app-portage/cpuid2cpuflags
+emerge app-portage/cpuid2cpuflags
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 
 echo "add licenses to make.conf"
@@ -52,32 +52,32 @@ echo "reload the environment"
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
 echo "install linux-firmware"
-emerge --ask sys-kernel/linux-firmware
+emerge sys-kernel/linux-firmware
 
 echo "install btrfs-progs"
-emerge --ask sys-fs/btrfs-progs
+emerge sys-fs/btrfs-progs
 
 echo "installing the kernel"
 #https://wiki.gentoo.org/wiki/Systemd#Installation
-#emerge --ask sys-kernel/gentoo-sources
+#emerge sys-kernel/gentoo-sources
 #ln -sf /proc/self/mounts /etc/mtab
 
 echo "installing dracut"
 mkdir -p /etc/dracut.conf.d/
 echo "# Dracut modules to add to the default" >> /etc/dracut.conf.d/usrmount.conf
 echo 'add_dracutmodules+=" usrmount "' >>  /etc/dracut.conf.d/usrmount.conf
-emerge --ask sys-kernel/dracut
+emerge -sys-kernel/dracut
 
 #eselect kernel set 1
-#emerge --ask sys-kernel/genkernel
+#emerge sys-kernel/genkernel
 #genkernel --menuconfig --btrfs --virtio all
 
-emerge --ask sys-kernel/gentoo-kernel-bin
+emerge sys-kernel/gentoo-kernel-bin
 
 dracut -f
 
 echo "install dhcp clien"
-emerge --ask net-misc/dhcpcd
+emerge net-misc/dhcpcd
 
 echo "set root pw"
 passwd
@@ -86,7 +86,7 @@ echo "initialize systemd"
 systemd-firstboot --prompt --setup-machine-id
 
 #skip fileindexing for now
-#emerge --ask sys-apps/mlocate
+#emerge sys-apps/mlocate
 
 #install plasma
 emerge kde-plasma/plasma-meta
@@ -94,10 +94,10 @@ echo "enable time synchronisation"
 systemctl enable systemd-timesyncd.service
 
 echo "install wlan tools"
-emerge --ask net-wireless/iw net-wireless/wpa_supplicant
+emerge net-wireless/iw net-wireless/wpa_supplicant
 
 echo "installing grub"
-emerge --ask sys-boot/grub
+emerge sys-boot/grub
 grub-install --target=x86_64-efi --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 
