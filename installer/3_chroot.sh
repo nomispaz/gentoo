@@ -15,14 +15,13 @@ echo "UUID=$rootDrive /data btrfs defaults,noatime,compress=zstd,subvol=data 0 0
 echo "UUID=$rootDrive /var btrfs defaults,noatime,compress=zstd,subvol=var 0 0" >> /etc/fstab
 echo "UUID=$rootDrive /.snapshots btrfs defaults,noatime,compress=zstd,subvol=snapshots 0 0" >> /etc/fstab
 
-echo "update ebuild repo"
-emerge --sync
-
 #currently no checkup of installation profiles. default for the stage-tarball is used"
 # eselect profile list
 # currently plasma, systemd is 10; only systemd is 22
 eselect profile set 22
 
+echo "update ebuild repo"
+emerge --sync
 
 echo "adding first use-flags and disabling all else"
 echo 'USE="-* initramfs redistributable systemd"' >> /etc/portage/make.conf
@@ -91,7 +90,7 @@ echo 'add_dracutmodules+=" usrmount "' >>  /etc/dracut.conf.d/usrmount.conf
 
 #install system
 #emerge     kde-plasma/plasma-meta   
-emerge \
+emerge --update \
 sys-kernel/linux-firmware \
 sys-kernel/gentoo-kernel-bin \
 sys-fs/btrfs-progs \
