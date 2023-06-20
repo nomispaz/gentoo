@@ -24,17 +24,38 @@ emerge --sync
 eselect profile set 22
 
 
-echo "adding first use-flags"
-echo 'USE="-elogind initramfs redistributable systemd sysv-utils"' >> /etc/portage/make.conf
+echo "adding first use-flags and disabling all else"
+echo 'USE="-* initramfs redistributable systemd"' >> /etc/portage/make.conf
 
-echo "adding use-flags for amd64 Testing for some packages
-echo "x11-terms/kitty ~amd64" >> /etc/portage/package.accept_keywords
-echo "gui-wm/hyprland ~amd64" >> /etc/portage/package.accept_keywords
-echo "gui-apps/waybar ~amd64" >> /etc/portage/package.accept_keywords
-echo "dev-libs/hyprland-protocols ~amd64" >> /etc/portage/package.accept_keywords
+echo "enable masked packages"
+cat <<EOF > /etc/portage/package.accept_keywords/packages
+app-forensics/lynis ~amd64
+gui-wm/hyprland ~amd64
+x11-terms/kitty* ~amd64
+gui-apps/waybar ~amd64
+dev-libs/hyprland-protocols ~amd64
+dev-libs/date ~amd64
+dev-libs/libliftoff ~amd64
+media-libs/libdisplay-info ~amd64
+gui-apps/wofi ~amd64
+media-gfx/w3mimgfb ~amd64
+app-laptop/tuxedo-keyboard ~amd64
+app-laptop/tuxedo-control-center-bin ~amd64
+EOF
 
 echo "adding use-flags to packages"
-echo "gui-apps/waybar experimental" >> /etc/portage/package.use
+cat <<EOF > /etc/portage/package.use/packages
+gui-app/waybar experimental
+gui-libs/wlroots x11-backend
+sys-process/lsof rpc
+net-dns/avahi python
+sys-boot/grub mount
+gnome-extra/nm-applet appindicator
+dev-libs/libdbusmenu gtk3
+media-video/pipewire sound-server gstreamer jack-client pipwire-alsa
+media-video/wireplumber systemd
+media-sound/pulseaudio -daemon
+EOF
 
 
 #echo "update @world set so that updates and new use-flags can be used"
@@ -99,6 +120,7 @@ gnome-base/gnome-keyring \
 net-wireless/wireless-tools \
 media-video/pipewire \
 media-video/wireplumber \
+sys-auth/rtkit
 media-libs/libpulse \
 dev-libs/wayland \
 x11-base/xwayland \
@@ -124,7 +146,7 @@ net-firewall/firewalld \
 net-print/gutenprint \
 net-print/hplip \
 sys-fs/mtpfs \
-sys-apps/hwinfo \
+sys-apps/hwinfo 
 net-fs/nfs-utils \
 sys-fs/ntfs3g \
 app-forensics/rkhunter \
@@ -166,6 +188,7 @@ app-forensics/lynis
 #https://gitweb.gentoo.org/repo/proj/guru.git/diff/gui-libs/xdg-desktop-portal-hyprland/xdg-desktop-portal-hyprland-0.4.0.ebuild?id=e2f022b1a006b60083858b076ef8270d069b168b
 #https://gitweb.gentoo.org/repo/proj/guru.git/diff/app-misc/brightnessctl/brightnessctl-0.5.1.ebuild?id=a4289cc59e1f6230e0c237c755926d4adaa23dca
 #add nvidia use flag to hyprland
+#woher kommt desktop-portal-hyprland?
 
 
 #skip fileindexing for now
