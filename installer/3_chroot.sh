@@ -181,7 +181,9 @@ app-misc/ranger \
 media-gfx/w3mimgfb \
 x11-misc/xsel \
 net-misc/chrony \
-app-forensics/lynis
+app-forensics/lynis \
+app-laptop/tuxedo-control-center-bin \
+app-laptop/tuxedo-keyboard
 
 #TODO: app-misc/brightnessctl, fonts, pamixer
 #local ebuilds:
@@ -232,10 +234,11 @@ systemctl enable sddm.service
 systemctl enable NetworkManager.service
 systemctl enable dhcpcd.service
 systemctl enable systemd-timesyncd.service
-systemctl enable wireplumber.service
 systemctl enable acpid.service
 systemctl enable bluetooth.service
 systemctl enable chronyd.service
+
+#https://www.gentoo.org/support/news-items/2022-07-29-pipewire-sound-server.html
 
 echo "next steps: check fstab, cd, umount -l /mnt/gentoo/dev{/shm,/pts,}, umount -R /mnt/gentoo, reboot"
 exit
