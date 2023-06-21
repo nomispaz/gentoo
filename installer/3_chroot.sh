@@ -180,8 +180,7 @@ app-misc/ranger \
 media-gfx/w3mimgfb \
 x11-misc/xsel \
 net-misc/chrony \
-app-forensics/lynis \
-dev-libs/libappindicator
+app-forensics/lynis
 
 echo "Install tuxedo-packages"
 emerge --update \
@@ -228,7 +227,7 @@ usermod -aG sys,wheel,users,rfkill,$user $user
 passwd $user
 
 echo "Defaults targetpw # Ask for the password of the target user" >> /etc/sudoers
-echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
+echo "$user ALL=(ALL:ALL) ALL" >> /etc/sudoers
 
 echo "Enable Services"
 systemctl enable systemd-networkd.service
