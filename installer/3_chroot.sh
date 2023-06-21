@@ -180,7 +180,10 @@ app-misc/ranger \
 media-gfx/w3mimgfb \
 x11-misc/xsel \
 net-misc/chrony \
-app-forensics/lynis \
+app-forensics/lynis 
+
+echo "Install tuxedo-packages"
+emerge --update \
 app-laptop/tuxedo-control-center-bin \
 app-laptop/tuxedo-keyboard
 
@@ -236,6 +239,8 @@ systemctl enable systemd-timesyncd.service
 systemctl enable acpid.service
 systemctl enable bluetooth.service
 systemctl enable chronyd.service
+
+systemctl enable tccd.service
 
 #https://www.gentoo.org/support/news-items/2022-07-29-pipewire-sound-server.html
 
