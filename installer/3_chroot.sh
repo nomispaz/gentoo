@@ -247,6 +247,15 @@ systemctl enable tccd.service
 
 firewall-cmd --set-default-zone block
 
+echo "harden installation"
+echo "KRNL-5820 disable coredumps"
+echo "* hard core 0" | tee -a /etc/security/limits.conf
+echo "* hard core 0" | tee -a /etc/security/limits.conf
+
+echo "Improve password hash quality"
+sed -i 's/#SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 500000/g' /etc/login.defs 
+sed -i 's/#SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 500000/g' /etc/login.defs
+
 #https://www.gentoo.org/support/news-items/2022-07-29-pipewire-sound-server.html
 
 echo "next steps: check fstab, cd, umount -l /mnt/gentoo/dev{/shm,/pts,}, umount -R /mnt/gentoo, reboot"
