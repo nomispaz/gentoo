@@ -245,6 +245,8 @@ systemctl enable apparmor.service
 
 systemctl enable tccd.service
 
+firewall-cmd --set-default-zone block
+
 #https://www.gentoo.org/support/news-items/2022-07-29-pipewire-sound-server.html
 
 echo "next steps: check fstab, cd, umount -l /mnt/gentoo/dev{/shm,/pts,}, umount -R /mnt/gentoo, reboot"
