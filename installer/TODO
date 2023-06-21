@@ -16,3 +16,4 @@ systemctl --user --force enable wireplumber.service
 #Schritt 3_chroot aufteilen. Installation des Systems in eigenes Skript auslagern, um mit Problemen mit use-flags besser umgehen zu können.
 
 #Anpassungen in grub übernehmen
+#upload angepasste hyperland.conf
