@@ -216,6 +216,15 @@ echo "installing grub"
 grub-install --target=x86_64-efi --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 
+echo "harden installation"
+echo "KRNL-5820 disable coredumps"
+echo "* hard core 0" | tee -a /etc/security/limits.conf
+echo "* hard core 0" | tee -a /etc/security/limits.conf
+
+echo "Improve password hash quality"
+sed -i 's/#SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 500000/g' /etc/login.defs 
+sed -i 's/#SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 500000/g' /etc/login.defs
+
 echo "set root pw"
 passwd
 
@@ -246,15 +255,6 @@ systemctl enable apparmor.service
 systemctl enable tccd.service
 
 firewall-cmd --set-default-zone block
-
-echo "harden installation"
-echo "KRNL-5820 disable coredumps"
-echo "* hard core 0" | tee -a /etc/security/limits.conf
-echo "* hard core 0" | tee -a /etc/security/limits.conf
-
-echo "Improve password hash quality"
-sed -i 's/#SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 500000/g' /etc/login.defs 
-sed -i 's/#SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 500000/g' /etc/login.defs
 
 #https://www.gentoo.org/support/news-items/2022-07-29-pipewire-sound-server.html
 
