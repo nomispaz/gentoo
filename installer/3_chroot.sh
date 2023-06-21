@@ -134,6 +134,7 @@ kde-apps/ark \
 sys-power/acpid \
 media-sound/alsa-utils \
 sys-apps/apparmor \
+sec-policy/apparmor-profiles \
 sys-apps/apparmor-utils \
 net-wireless/bluez \
 app-antivirus/clamav \
@@ -240,6 +241,7 @@ systemctl enable acpid.service
 systemctl enable bluetooth.service
 systemctl enable chronyd.service
 systemctl enable firewalld.service
+systemctl enable apparmor.service
 
 systemctl enable tccd.service
 
