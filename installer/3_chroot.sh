@@ -239,6 +239,7 @@ systemctl enable systemd-timesyncd.service
 systemctl enable acpid.service
 systemctl enable bluetooth.service
 systemctl enable chronyd.service
+systemctl enable firewalld.service
 
 systemctl enable tccd.service
 
