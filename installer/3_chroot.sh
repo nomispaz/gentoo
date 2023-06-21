@@ -180,7 +180,8 @@ app-misc/ranger \
 media-gfx/w3mimgfb \
 x11-misc/xsel \
 net-misc/chrony \
-app-forensics/lynis 
+app-forensics/lynis \
+dev-libs/libappindicator
 
 echo "Install tuxedo-packages"
 emerge --update \
