@@ -28,3 +28,9 @@ systemctl --user --force enable wireplumber.service
 emerge --ask app-eselect/eselect-repository
 eselect repository create gentoo_localrepo
 mkdir -p /var/db/repos/gentoo_localrepo/app-misc/brightnessctl
+
+
+replace rust with rust-bin https://wiki.gentoo.org/wiki/User:Vazhnov/Knowledge_Base:replace_rust_with_rust-bin?
+but check how long complile times are with new laptop
+
+install app-portage/genlop
