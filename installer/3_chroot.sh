@@ -248,13 +248,14 @@ systemctl enable tccd.service
 
 firewall-cmd --set-default-zone block
 
-sudo umount /.snapshots
-sudo rm -r /.snapshots
-sudo snapper -c root create-config /
+echo "Setup snapper"
+umount /.snapshots
+rm -r /.snapshots
+snapper -c root create-config /
 #read UUID of rootpartition and write into variable
 rootUUID=$(cat /etc/fstab | sed -nE 's/.*UUID=(.*)+ \/.*+root.*$/\1/p')
-sudo mount -o subvol=snapshots UUID=$rootUUID /.snapshots
-sudo chmod 750 /.snapshots/
+mount -o subvol=snapshots UUID=$rootUUID /.snapshots
+chmod 750 /.snapshots/
 
 #https://www.gentoo.org/support/news-items/2022-07-29-pipewire-sound-server.html
 
