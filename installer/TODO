@@ -34,3 +34,9 @@ replace rust with rust-bin https://wiki.gentoo.org/wiki/User:Vazhnov/Knowledge_B
 but check how long complile times are with new laptop
 
 install app-portage/genlop
+
+#steam
+https://wiki.gentoo.org/wiki/steam
+
+#search for bin-packages
+sudo equery -q list --portage-tree --full-regex '.*/.*-bin'
