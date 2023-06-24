@@ -44,4 +44,6 @@ sudo equery -q list --portage-tree --full-regex '.*/.*-bin'
 
 
 neue zsh config hochladen
+https://wiki.gentoo.org/wiki/Creating_an_ebuild_repository#Adding_an_ebuild_to_an_ebuild_repository
 lokale ebuild hochladen bzw. mit git-repo syncen
+Frage: wie erzeuge ich automatisiert eine Version
