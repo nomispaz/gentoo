@@ -40,20 +40,82 @@ gui-apps/wofi ~amd64
 media-gfx/w3mimgfb ~amd64
 app-laptop/tuxedo-keyboard ~amd64
 app-laptop/tuxedo-control-center-bin ~amd64
+*/*::steam-overlay
+games-util/game-device-udev-rules ~amd64
+app-shells/zsh-autosuggestions ~amd64
+app-shells/zsh-history-substring-search ~amd64
+gui-libs/xdg-desktop-portal-hyprland ~amd64
+dev-qt/qtbase ~amd64
+dev-qt/qtwayland ~amd64
+dev-qt/qtdeclarative ~amd64
+dev-qt/qtshadertools ~amd64
+app-misc/brightnessctl ~amd64
+gui-libs/xdg-desktop-portal-hyprland ~amd64
 EOF
 
 echo "adding use-flags to packages"
 cat <<EOF > /etc/portage/package.use/packages
-gui-app/waybar experimental
+gui-apps/waybar experimental tray pipewire network wifi pulseaudio
 gui-libs/wlroots x11-backend
 sys-process/lsof rpc
 net-dns/avahi python
 sys-boot/grub mount
 gnome-extra/nm-applet appindicator
 dev-libs/libdbusmenu gtk3
-media-video/pipewire sound-server gstreamer jack-client pipwire-alsa
+media-video/pipewire sound-server gstreamer jack-client pipwire-alsa dbus
 media-video/wireplumber systemd
 media-sound/pulseaudio -daemon
+media-libs/libcanberra alsa
+x11-libs/cairo X
+x11-libs/pango X
+dev-cpp/gtkmm X
+dev-cpp/cairomm X
+media-libs/libglvnd X
+x11-libs/gtk+ wayland
+dev-qt/qtgui dbus egl
+x11-libs/libxkbcommon X
+media-libs/mesa wayland
+kde-frameworks/kwindowsystem X
+kde-frameworks/kconfig dbus
+dev-qt/qtcore icu
+net-firewall/nftables xtables json python
+sys-apps/systemd policykit
+app-text/ghostscript-gpl cups
+media-video/vlc dbus ogg
+media-sound/jack2 dbus
+app-crypt/gcr gtk
+app-text/xmlto text
+net-wireless/wpa_supplicant dbus
+dev-qt/qtmultimedia widgets
+x11-drivers/nvidia-drivers dist-kernel
+media-libs/libsdl2 gles2
+x11-drivers/nvidia-drivers wayland
+media-fonts/fontawesome ttf
+x11-libs/libX11  abi_x86_32
+x11-libs/libXau  abi_x86_32
+x11-libs/libxcb  abi_x86_32
+x11-libs/libXdmcp  abi_x86_32
+virtual/opengl  abi_x86_32
+media-libs/mesa  abi_x86_32
+dev-libs/expat  abi_x86_32
+media-libs/libglvnd  abi_x86_32
+sys-libs/zlib  abi_x86_32
+x11-libs/libdrm  abi_x86_32
+x11-libs/libxshmfence  abi_x86_32
+x11-libs/libXext  abi_x86_32
+x11-libs/libXxf86vm  abi_x86_32
+x11-libs/libXfixes  abi_x86_32
+app-arch/zstd  abi_x86_32
+sys-devel/llvm  abi_x86_32
+x11-libs/libXrandr  abi_x86_32
+x11-libs/libXrender  abi_x86_32
+dev-libs/libffi  abi_x86_32
+sys-libs/ncurses  abi_x86_32 -gpm
+dev-libs/libxml2  abi_x86_32
+dev-libs/icu  abi_x86_32
+sys-libs/gpm  abi_x86_32
+virtual/libelf  abi_x86_32
+dev-libs/elfutils  abi_x86_32
 EOF
 
 
