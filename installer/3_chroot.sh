@@ -161,3 +161,4 @@ emerge --ask --verbose --update --deep --newuse @world
 echo "reload the environment"
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
+echo "next step: run 4_chroot_install_system.sh"
