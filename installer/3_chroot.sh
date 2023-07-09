@@ -127,13 +127,6 @@ virtual/libelf  abi_x86_32
 dev-libs/elfutils  abi_x86_32
 EOF
 
-echo "set CPU_FLAGS"
-emerge app-portage/cpuid2cpuflags
-echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
-
-echo "update @world set so that updates and new use-flags can be used"
-emerge --ask --verbose --update --deep --newuse @world
-
 echo "add licenses to make.conf"
 echo 'ACCEPT_LICENSE="@FREE @GPL-COMPATIBLE @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
 echo "add grub platform"
@@ -153,13 +146,21 @@ echo "KEYMAP=de-latin1" >> /etc/conf.d/keymaps
 echo "XMGgentoo" >> /etc/hostname
 locale-gen
 
-echo "reload the environment"
-env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+echo "set CPU_FLAGS"
+emerge app-portage/cpuid2cpuflags
+echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 
 echo "configuring dracut"
 mkdir -p /etc/dracut.conf.d/
 echo "# Dracut modules to add to the default" >> /etc/dracut.conf.d/usrmount.conf
 echo 'add_dracutmodules+=" usrmount "' >>  /etc/dracut.conf.d/usrmount.conf
+
+echo "update @world set so that updates and new use-flags can be used"
+emerge --ask --verbose --update --deep --newuse @world
+
+echo "reload the environment"
+env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+
 
 #install system
 #emerge     kde-plasma/plasma-meta   
