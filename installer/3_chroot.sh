@@ -32,6 +32,9 @@ emerge --sync
 echo "adding first use-flags"
 echo 'USE="-elogind initramfs redistributable systemd"' >> /etc/portage/make.conf
 
+echo "set makeopts"
+echo 'MAKEOPTS="--jobs 8 --load-average 9"' >> /etc/portage/make.conf
+
 echo "enable masked packages"
 cat <<EOF > /etc/portage/package.accept_keywords/packages
 app-forensics/lynis ~amd64
