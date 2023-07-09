@@ -181,7 +181,8 @@ app-misc/ranger \
 media-gfx/w3mimgfb \
 x11-misc/xsel \
 net-misc/chrony \
-app-forensics/lynis
+app-forensics/lynis \
+app-portage/genlop
 
 echo "Install tuxedo-packages"
 emerge --update \
@@ -258,6 +259,9 @@ mount -o subvol=snapshots UUID=$rootUUID /.snapshots
 chmod 750 /.snapshots/
 
 #https://www.gentoo.org/support/news-items/2022-07-29-pipewire-sound-server.html
+#enable pipewire
+sudo mkdir -p /etc/pipewire
+sudo cp /usr/share/pipewire/pipewire.conf /etc/pipewire/pipewire.conf
 
 echo "next steps: check fstab, cd, umount -l /mnt/gentoo/dev{/shm,/pts,}, umount -R /mnt/gentoo, reboot"
 exit
