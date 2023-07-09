@@ -20,11 +20,14 @@ echo "UUID=$rootDrive /.snapshots btrfs defaults,noatime,compress=zstd,subvol=sn
 # currently desktop, systemd is 12; only systemd is 22, systemd, plasma is 10
 eselect profile set 12
 
+echo "add personal repo from github"
+sudo eselect repository add gentoo_localrepo git https://github.com/nomispaz/gentoo_localrepo.git
+
 echo "update ebuild repo"
 emerge --sync
 
-echo "adding first use-flags and disabling all else"
-echo 'USE="-* initramfs redistributable systemd"' >> /etc/portage/make.conf
+echo "adding first use-flags"
+echo 'USE="-elogind initramfs redistributable systemd"' >> /etc/portage/make.conf
 
 echo "enable masked packages"
 cat <<EOF > /etc/portage/package.accept_keywords/packages
@@ -118,13 +121,12 @@ virtual/libelf  abi_x86_32
 dev-libs/elfutils  abi_x86_32
 EOF
 
-
-#echo "update @world set so that updates and new use-flags can be used"
-emerge --ask --verbose --update --deep --newuse @world
-
 echo "set CPU_FLAGS"
 emerge app-portage/cpuid2cpuflags
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+
+echo "update @world set so that updates and new use-flags can be used"
+emerge --ask --verbose --update --deep --newuse @world
 
 echo "add licenses to make.conf"
 echo 'ACCEPT_LICENSE="@FREE @GPL-COMPATIBLE @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
