@@ -263,6 +263,15 @@ x11-misc/prime-run \
 games-util/steam-launcher \
 sys-apps/flatpak
 
+finishInstallation="n"
+echo "Check for install errors. Continue? [Y/n]"
+read finishInstallation
+
+if ! [[ "$finishInstallation" == "N" || "$finishInstallation" == "n" ]]
+then
+    echo "Cancelling Installation"
+else
+echo "Continuing installation"
 echo "Install tuxedo-packages"
 emerge --update \
 app-laptop/tuxedo-control-center-bin \
@@ -344,3 +353,4 @@ sudo cp /usr/share/pipewire/pipewire.conf /etc/pipewire/pipewire.conf
 
 echo "next steps: check fstab, cd, umount -l /mnt/gentoo/dev{/shm,/pts,}, umount -R /mnt/gentoo, reboot"
 exit
+fi
