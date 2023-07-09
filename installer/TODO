@@ -6,7 +6,6 @@ systemctl --user --force enable wireplumber.service
 
 #Deutsche Tastatur in sddm
 
-#make.conf, package.use und package.accept... hochladen und gegenprüfen
 #compile-options optimieren
 
 #Schritt 3_chroot aufteilen. Installation des Systems in eigenes Skript auslagern, um mit Problemen mit use-flags besser umgehen zu können.
@@ -14,23 +13,8 @@ systemctl --user --force enable wireplumber.service
 #Anpassungen in grub übernehmen
 #upload angepasste hyperland.conf
 
-
-#TODO: app-misc/brightnessctl, fonts
-#local ebuilds:
-#https://gitweb.gentoo.org/repo/proj/guru.git/diff/gui-libs/xdg-desktop-portal-hyprland/xdg-desktop-portal-hyprland-0.4.0.ebuild?id=e2f022b1a006b60083858b076ef8270d069b168b
-#https://gitweb.gentoo.org/repo/proj/guru.git/diff/app-misc/brightnessctl/brightnessctl-0.5.1.ebuild?id=a4289cc59e1f6230e0c237c755926d4adaa23dca
-
-#local and git repo steps
-emerge --ask app-eselect/eselect-repository
-eselect repository create gentoo_localrepo
-mkdir -p /var/db/repos/gentoo_localrepo/app-misc/brightnessctl
-
-
 replace rust with rust-bin https://wiki.gentoo.org/wiki/User:Vazhnov/Knowledge_Base:replace_rust_with_rust-bin?
 but check how long complile times are with new laptop
-
-#steam
-https://wiki.gentoo.org/wiki/steam
 
 #search for bin-packages
 https://wiki.gentoo.org/wiki/Creating_an_ebuild_repository#Adding_an_ebuild_to_an_ebuild_repository
@@ -39,5 +23,4 @@ sudo equery -q list --portage-tree --full-regex '.*/.*-bin'
 
 neue zsh config hochladen
 https://wiki.gentoo.org/wiki/Creating_an_ebuild_repository#Adding_an_ebuild_to_an_ebuild_repository
-lokale ebuild hochladen bzw. mit git-repo syncen
 Frage: wie erzeuge ich automatisiert eine Version
