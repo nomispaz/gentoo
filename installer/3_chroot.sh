@@ -21,7 +21,10 @@ echo "UUID=$rootDrive /.snapshots btrfs defaults,noatime,compress=zstd,subvol=sn
 eselect profile set 12
 
 echo "add personal repo from github"
-sudo eselect repository add gentoo_localrepo git https://github.com/nomispaz/gentoo_localrepo.git
+eselect repository add gentoo_localrepo git https://github.com/nomispaz/gentoo_localrepo.git
+
+echo "add steam repo"
+eselect repository enable steam-overlay
 
 echo "update ebuild repo"
 emerge --sync
@@ -132,6 +135,9 @@ echo "add licenses to make.conf"
 echo 'ACCEPT_LICENSE="@FREE @GPL-COMPATIBLE @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
 echo "add grub platform"
 echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
+
+echo "add video-cards to make.conf"
+VIDEO_CARDS="amdgpu radeonsi radeon nvidia"
 
 echo "set locales and time"
 ln -sf ../usr/share/zoneinfo/Europe/Berlin /etc/localtime
@@ -246,14 +252,19 @@ media-gfx/w3mimgfb \
 x11-misc/xsel \
 net-misc/chrony \
 app-forensics/lynis \
-app-portage/genlop
+app-portage/genlop \
+app-misc/brightnessctl \
+dev-util/pkgdev \
+x11-misc/prime-run \
+games-util/steam-launcher \
+sys-apps/flatpak
 
 echo "Install tuxedo-packages"
 emerge --update \
 app-laptop/tuxedo-control-center-bin \
 app-laptop/tuxedo-keyboard
 
-#skip fileindexing for now
+#skip fileindexing for nowge
 #emerge sys-apps/mlocate
 
 #https://wiki.gentoo.org/wiki/Systemd#Installation
