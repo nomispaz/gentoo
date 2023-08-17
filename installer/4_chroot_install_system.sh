@@ -29,7 +29,7 @@ gnome-base/gnome-keyring \
 net-wireless/wireless-tools \
 media-video/pipewire \
 media-video/wireplumber \
-sys-auth/rtkit
+sys-auth/rtkit \
 media-libs/libpulse \
 dev-libs/wayland \
 x11-base/xwayland \
@@ -56,7 +56,7 @@ net-firewall/firewalld \
 net-print/gutenprint \
 net-print/hplip \
 sys-fs/mtpfs \
-sys-apps/hwinfo 
+sys-apps/hwinfo \
 net-fs/nfs-utils \
 sys-fs/ntfs3g \
 app-forensics/rkhunter \
@@ -64,7 +64,8 @@ net-misc/rsync \
 app-arch/unrar \
 app-arch/unzip \
 gui-libs/xdg-desktop-portal-hyprland \
-gui-libs/xdg-desktop-portal \
+sys-apps/xdg-desktop-portal \
+sys-apps/xdg-desktop-portal-gtk
 app-shells/zsh \
 app-shells/zsh-completions \
 app-shells/gentoo-zsh-completions \
@@ -103,7 +104,7 @@ finishInstallation="n"
 echo "Check for install errors. Continue? [Y/n]"
 read finishInstallation
 
-if ! [[ "$finishInstallation" == "N" || "$finishInstallation" == "n" ]]
+if ! [[ "$finishInstallation" == "Y" || "$finishInstallation" == "y" ]]
 then
     echo "Cancelling Installation"
 else
@@ -131,6 +132,10 @@ systemd-firstboot --prompt --setup-machine-id
 
 echo "installing grub"
 grub-install --target=x86_64-efi --efi-directory=/boot/efi
+
+echo 'GRUB_DISABLE_OS_PROBER="false"' >> /etc/default/grub
+sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 mitigations=auto security=apparmor amd_pstate=passive nvidia_drm.modeset=1"/g' /etc/default/grub
+
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "harden installation"
