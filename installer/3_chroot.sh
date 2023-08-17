@@ -30,7 +30,7 @@ echo "update ebuild repo"
 emerge --sync
 
 echo "adding first use-flags"
-echo 'USE="-elogind initramfs redistributable systemd"' >> /etc/portage/make.conf
+echo 'USE="-elogind initramfs redistributable systemd X wayland"' >> /etc/portage/make.conf
 
 echo "set makeopts"
 echo 'MAKEOPTS="--jobs 8 --load-average 9"' >> /etc/portage/make.conf
@@ -39,7 +39,7 @@ echo "enable masked packages"
 cat <<EOF > /etc/portage/package.accept_keywords/packages
 app-forensics/lynis ~amd64
 gui-wm/hyprland ~amd64
-x11-terms/kitty* ~amd64
+x11-terms/kitty ~amd64
 gui-apps/waybar ~amd64
 dev-libs/hyprland-protocols ~amd64
 dev-libs/date ~amd64
@@ -60,6 +60,13 @@ dev-qt/qtdeclarative ~amd64
 dev-qt/qtshadertools ~amd64
 app-misc/brightnessctl ~amd64
 gui-libs/xdg-desktop-portal-hyprland ~amd64
+dev-libs/wayland-protocols ~amd64
+x11-drivers/nvidia-drivers ~amd64
+sys-firmware/nvidia-firmware ~amd64
+sys-kernel/gentoo-kernel-bin ~amd64
+sys-kernel/gentoo-sources ~amd64
+virtual/dist-kernel ~amd64
+x11-misc/sddm ~amd64
 EOF
 
 echo "adding use-flags to packages"
@@ -83,7 +90,7 @@ media-libs/libglvnd X
 x11-libs/gtk+ wayland
 dev-qt/qtgui dbus egl
 x11-libs/libxkbcommon X
-media-libs/mesa wayland
+media-libs/mesa wayland abi_x86_32
 kde-frameworks/kwindowsystem X
 kde-frameworks/kconfig dbus
 dev-qt/qtcore icu
@@ -96,16 +103,14 @@ app-crypt/gcr gtk
 app-text/xmlto text
 net-wireless/wpa_supplicant dbus
 dev-qt/qtmultimedia widgets
-x11-drivers/nvidia-drivers dist-kernel
+x11-drivers/nvidia-drivers dist-kernel modules wayland tools kernel-open
 media-libs/libsdl2 gles2
-x11-drivers/nvidia-drivers wayland
 media-fonts/fontawesome ttf
 x11-libs/libX11  abi_x86_32
 x11-libs/libXau  abi_x86_32
 x11-libs/libxcb  abi_x86_32
 x11-libs/libXdmcp  abi_x86_32
 virtual/opengl  abi_x86_32
-media-libs/mesa  abi_x86_32
 dev-libs/expat  abi_x86_32
 media-libs/libglvnd  abi_x86_32
 sys-libs/zlib  abi_x86_32
@@ -125,6 +130,17 @@ dev-libs/icu  abi_x86_32
 sys-libs/gpm  abi_x86_32
 virtual/libelf  abi_x86_32
 dev-libs/elfutils  abi_x86_32
+app-arch/bzip2 abi_x86_32
+x11-libs/libpciaccess abi_x86_32
+dev-libs/wayland abi_x86_32
+dev-qt/qtbase opengl egl
+dev-qt/qtdeclarative opengl
+x11-terms/kitty wayland
+gui-apps/swaybg gdk-pixbuf
+gui-wm/sway wallpapers
+sys-apps/xdg-desktop-portal-gtk wayland
+app-laptop/tuxedo-keyboard dist-kernel
+games-util/steam-launcher ValveSteamLicense
 EOF
 
 echo "add licenses to make.conf"
@@ -133,7 +149,7 @@ echo "add grub platform"
 echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
 
 echo "add video-cards to make.conf"
-VIDEO_CARDS="amdgpu radeonsi radeon nvidia"
+echo 'VIDEO_CARDS="amdgpu radeonsi radeon nvidia"' >> /etc/portage/make.conf
 
 echo "set locales and time"
 ln -sf ../usr/share/zoneinfo/Europe/Berlin /etc/localtime
