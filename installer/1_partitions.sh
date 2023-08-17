@@ -49,5 +49,5 @@ mount --mkdir /dev/$efiDrive /mnt/gentoo/boot/efi
 
 cd /mnt/gentoo
 #wget "https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20230611T170207Z/stage3-amd64-desktop-systemd-20230611T170207Z.tar.xz"
-wget "https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20230611T170207Z/stage3-amd64-systemd-20230611T170207Z.tar.xz"
+wget "https://distfiles.gentoo.org/releases/amd64/autobuilds/20230813T170146Z/stage3-amd64-desktop-systemd-20230813T170146Z.tar.xz"
 echo "Run /home/gentoo/gentoo/install/2_preparations.sh. Never leave /mnt/gentoo!"
