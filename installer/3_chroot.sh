@@ -15,6 +15,8 @@ echo "UUID=$rootDrive /data btrfs defaults,noatime,compress=zstd,subvol=data 0 0
 echo "UUID=$rootDrive /var btrfs defaults,noatime,compress=zstd,subvol=var 0 0" >> /etc/fstab
 echo "UUID=$rootDrive /.snapshots btrfs defaults,noatime,compress=zstd,subvol=snapshots 0 0" >> /etc/fstab
 
+emerge --ask app-eselect/eselect-repository
+
 #currently no checkup of installation profiles. default for the stage-tarball is used"
 # eselect profile list
 # currently desktop, systemd is 12; only systemd is 22, systemd, plasma is 10
