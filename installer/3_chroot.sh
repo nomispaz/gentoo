@@ -145,6 +145,13 @@ app-laptop/tuxedo-keyboard dist-kernel
 games-util/steam-launcher ValveSteamLicense
 EOF
 
+echo "enable specific licenses"
+cat <<EOF > /etc/portage/package.license
+net-im/discord all-rights-reserved
+app-crypt/veracrypt truecrypt-3.0
+games-util/steam-launcher ValveSteamLicense
+EOF
+
 echo "add licenses to make.conf"
 echo 'ACCEPT_LICENSE="@FREE @GPL-COMPATIBLE @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
 echo "add grub platform"
