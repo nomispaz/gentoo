@@ -1,9 +1,3 @@
-#Frage: muss ich das als user ausführen oder geht das auch im chroot? Wie macht das Arch?
-systemctl --user --now disable pulseaudio.service pulseaudio.socket
-systemctl --user --now enable pipewire.socket pipewire-pulse.socket
-systemctl --user --now disable pipewire-media-session.service
-systemctl --user --force enable wireplumber.service
-
 #Deutsche Tastatur in sddm
 
 #compile-options optimieren
