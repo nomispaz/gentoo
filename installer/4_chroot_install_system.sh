@@ -65,7 +65,7 @@ app-arch/unrar \
 app-arch/unzip \
 gui-libs/xdg-desktop-portal-hyprland \
 sys-apps/xdg-desktop-portal \
-sys-apps/xdg-desktop-portal-gtk
+sys-apps/xdg-desktop-portal-gtk \
 app-shells/zsh \
 app-shells/zsh-completions \
 app-shells/gentoo-zsh-completions \
