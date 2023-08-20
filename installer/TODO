@@ -3,11 +3,7 @@
 #compile-options optimieren
 
 #Anpassungen in grub übernehmen
-#upload angepasste hyperland.conf
 
 #search for bin-packages
 https://wiki.gentoo.org/wiki/Creating_an_ebuild_repository#Adding_an_ebuild_to_an_ebuild_repository
 sudo equery -q list --portage-tree --full-regex '.*/.*-bin'
-
-
-neue zsh config hochladen
