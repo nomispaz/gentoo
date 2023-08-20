@@ -155,7 +155,7 @@ echo "Enter username: "
 read user
 useradd -m --create-home $user
 #usermod -aG sys,wheel,users,rfkill,$user,libvirt $user
-usermod -aG sys,wheel,users,rfkill,$user $user
+usermod -aG sys,wheel,users,rfkill,pipewire,$user $user
 passwd $user
 
 echo "Defaults targetpw # Ask for the password of the target user" >> /etc/sudoers
