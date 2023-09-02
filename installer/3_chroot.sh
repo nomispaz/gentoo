@@ -65,10 +65,16 @@ gui-libs/xdg-desktop-portal-hyprland ~amd64
 dev-libs/wayland-protocols ~amd64
 x11-drivers/nvidia-drivers ~amd64
 sys-firmware/nvidia-firmware ~amd64
-sys-kernel/gentoo-kernel-bin ~amd64
-sys-kernel/gentoo-sources ~amd64
-virtual/dist-kernel ~amd64
+#sys-kernel/gentoo-kernel-bin ~amd64
+=sys-kernel/gentoo-sources-6.4* ~amd64
+virtual/dist-kernel-6.4* ~amd64
 x11-misc/sddm ~amd64
+sys-kernel/gentoo-kernel-6.4* ~amd64
+media-video/obs-studio ~amd64
+gui-wm/gamescope ~amd64
+media-libs/vkroots ~amd64
+games-util/mangohud ~amd64
+app-backup/mkstage4 ~amd64
 EOF
 
 echo "adding use-flags to packages"
