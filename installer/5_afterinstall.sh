@@ -24,3 +24,7 @@ app-admin/keepassxc
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.usebottles.bottles
 flatpak install flathub com.github.tchx84.Flatseal
+
+#firewalld
+sudo firewall-cmd --set-default-zone block
+sudo systemctl restart firewalld.service
