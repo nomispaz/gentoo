@@ -8,6 +8,10 @@ systemctl --user --force enable wireplumber.service
 sudo systemctl enable nvidia-powerd.service
 sudo systemctl start nvidia-powerd.service
 
+#add brave-overlay
+sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
+sudo emerge --sync brave-overlay
+
 sudo emerge --ask \
 app-crypt/veracrypt \
 mail-client/thunderbird-bin \
@@ -18,7 +22,11 @@ gui-apps/slurp \
 gui-wm/gamescope \
 kde-apps/kio-extras \
 net-misc/yt-dlp \
-app-admin/keepassxc
+app-admin/keepassxc \
+media-video/obs-studio \
+net-wireless/blueman \
+app-backup/mkstage4 \
+www-client/brave-bin
 
 #flathub
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
