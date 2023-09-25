@@ -26,7 +26,11 @@ app-admin/keepassxc \
 media-video/obs-studio \
 net-wireless/blueman \
 app-backup/mkstage4 \
-www-client/brave-bin
+app-admin/eclean-kernel \
+dev-util/ccache \
+games-util/mangohud \
+www-client/brave-bin \
+app-emulation/looking-glass
 
 #flathub
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
