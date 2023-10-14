@@ -177,6 +177,8 @@ wClock = widget.Clock(background=colors['Blue'],format="%Y-%m-%d %a %H:%M",width
             
 screens = [
     Screen(
+        wallpaper='~/Pictures/1920x1080_px_forest-1262037.jpg',
+        wallpaper_mode='fill',
         top=bar.Bar(
             [
                 wGroupBox,
@@ -202,6 +204,8 @@ screens = [
         # x11_drag_polling_rate = 60,
     ),
     Screen(
+        wallpaper='~/Pictures/1920x1080_px_forest-1262037.jpg',
+        wallpaper_mode='fill',
         top=bar.Bar(
             [
                 wGroupBox,
