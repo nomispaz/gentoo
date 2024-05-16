@@ -19,8 +19,8 @@ emerge --ask app-eselect/eselect-repository
 
 #currently no checkup of installation profiles. default for the stage-tarball is used"
 # eselect profile list
-# currently desktop, systemd is 12; only systemd is 22, systemd, plasma is 10
-eselect profile set 12
+# currently desktop, systemd is 24
+eselect profile set 24
 
 echo "add personal repo from github"
 eselect repository add gentoo_localrepo git https://github.com/nomispaz/gentoo_localrepo.git
