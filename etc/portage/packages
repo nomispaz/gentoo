@@ -1,0 +1,91 @@
+#kernel
+sys-kernel/gentoo-sources ~amd64
+#sys-kernel/gentoo-kernel ~amd64
+virtual/dist-kernel ~amd64
+sys-kernel/gentoo-kernel-bin ~amd64
+
+#hyprland
+gui-wm/hyprland ~amd64
+dev-libs/hyprland-protocols ~amd64
+gui-libs/xdg-desktop-portal-hyprland ~amd64
+gui-apps/waybar ~amd64
+
+media-video/wireplumber ~amd64
+media-video/pipewire ~amd64
+
+gui-apps/rofi-wayland ~amd64
+app-misc/brightnessctl ~amd64
+dev-cpp/tomlplusplus ~amd64
+#gui-apps/wofi ~amd64
+dev-libs/hyprlang ~amd64
+gui-libs/hyprcursor ~amd64
+
+#wayland
+#gui-libs/wlroots ~amd64
+gui-apps/wdisplays ~amd64
+media-libs/vkroots ~amd64
+dev-libs/wayland-protocols ~amd64
+
+#hardware
+app-laptop/tuxedo-drivers ~amd64
+app-laptop/tuxedo-control-center-bin ~amd64
+x11-drivers/nvidia-drivers ~amd64
+sys-firmware/nvidia-firmware ~amd64
+
+#zsh
+#app-shells/zsh-autosuggestions ~amd64
+#app-shells/zsh-history-substring-search ~amd64
+
+#gaming
+*/*::steam-overlay
+games-util/game-device-udev-rules ~amd64
+gui-wm/gamescope ~amd64
+games-util/mangohud ~amd64
+media-libs/libavif ~amd64
+sys-libs/libudev-compat ~amd64
+
+#droidcam
+media-video/droidcam ~amd64
+
+#qtile
+x11-wm/qtile ~amd64
+x11-wm/qtile-extras ~amd64
+dev-python/pywlroots ~amd64
+
+#alacritty
+x11-terms/alacritty ~amd64
+
+#terminal calender for qtile widget
+app-misc/khal ~amd64
+dev-python/click-log ~amd64
+
+#kitty
+#x11-terms/kitty ~amd64
+#x11-terms/kitty-shell-integration ~amd64
+#x11-terms/kitty-terminfo ~amd64
+
+#qt
+#dev-qt/qtbase ~amd64
+#dev-qt/qtwayland ~amd64
+#dev-qt/qtdeclarative ~amd64
+#dev-qt/qtshadertools ~amd64
+#dev-qt/qttranslations ~amd64
+#dev-qt/qttools ~amd64
+#dev-qt/qtcore ~amd64
+#dev-qt/qtsvg ~amd64
+
+dev-libs/date ~amd64
+dev-libs/libliftoff ~amd64
+media-libs/libdisplay-info ~amd64
+media-gfx/w3mimgfb ~amd64
+x11-misc/sddm ~amd64
+media-video/obs-studio ~amd64
+app-backup/mkstage4 ~amd64
+app-emulation/looking-glass ~amd64
+app-editors/vscodium ~amd64
+media-fonts/nerd-fonts-symbols ~amd64
+media-video/obs-pipewire-audio-capture ~amd64
+app-emulation/virtiofsd ~amd64
+x11-libs/libdrm ~amd64
+dev-cpp/sdbus-c++ ~amd64
+app-forensics/lynis ~amd64
