@@ -1,0 +1,25 @@
+From 212987cb22ef038736784e6b72524afbc020ef74 Mon Sep 17 00:00:00 2001
+From: Christian Geier <geier@lostpackets.de>
+Date: Sat, 13 Jan 2024 22:58:12 +0100
+Subject: [PATCH] make ikhal work with urwid 2.4.2
+
+There seem to be no issues with older versions of urwid.
+---
+ CHANGELOG.rst     | 1 +
+ khal/ui/editor.py | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/khal/ui/editor.py b/khal/ui/editor.py
+index b4404f409..c9b5975d5 100644
+--- a/khal/ui/editor.py
++++ b/khal/ui/editor.py
+@@ -116,7 +116,7 @@ def __init__(
+         monthdisplay: Literal['firstday', 'firstfullweek']='firstday',
+         keybindings=None,
+     ):
+-        datewidth = len(startdt.strftime(dateformat)) + 1
++        datewidth = len(startdt.strftime(dateformat))
+         self._dateformat = dateformat
+         if startdt is None:
+             startdt = dt.date.today()
+
