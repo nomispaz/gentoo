@@ -1,0 +1,177 @@
+#requirement for rkhunter
+sys-process/lsof rpc
+gui-apps/waybar experimental tray pipewire network wifi pulseaudio
+#gui-libs/wlroots x11-backend
+=gui-libs/wlroots-0.16* x11-backend
+net-dns/avahi python
+sys-boot/grub mount
+gnome-extra/nm-applet appindicator
+media-video/pipewire sound-server gstreamer jack-client pipwire-alsa dbus bluetooth
+media-libs/mesa wayland abi_x86_32
+net-firewall/nftables xtables json python
+media-video/vlc dbus ogg pulseaudio ffmpeg gstreamer jack mp3 mpeg x264 alsa
+x11-drivers/nvidia-drivers dist-kernel modules wayland tools kernel-open powerd
+media-libs/libsdl2 gles2
+x11-libs/libX11  abi_x86_32
+x11-libs/libXau  abi_x86_32
+x11-libs/libxcb  abi_x86_32
+x11-libs/libXdmcp  abi_x86_32
+virtual/opengl  abi_x86_32
+dev-libs/expat  abi_x86_32
+media-libs/libglvnd  abi_x86_32
+sys-libs/zlib  abi_x86_32 minizip
+x11-libs/libdrm  abi_x86_32
+x11-libs/libxshmfence  abi_x86_32
+x11-libs/libXext  abi_x86_32
+x11-libs/libXxf86vm  abi_x86_32
+x11-libs/libXfixes  abi_x86_32
+app-arch/zstd  abi_x86_32
+sys-devel/llvm  abi_x86_32
+x11-libs/libXrandr  abi_x86_32
+x11-libs/libXrender  abi_x86_32
+dev-libs/libffi  abi_x86_32
+sys-libs/ncurses  abi_x86_32 -gpm
+dev-libs/libxml2  abi_x86_32
+dev-libs/icu  abi_x86_32
+sys-libs/gpm  abi_x86_32
+virtual/libelf  abi_x86_32
+dev-libs/elfutils  abi_x86_32
+app-arch/bzip2 abi_x86_32
+x11-libs/libpciaccess abi_x86_32
+dev-libs/wayland abi_x86_32
+dev-qt/qtbase opengl egl -libproxy
+gui-apps/swaybg gdk-pixbuf
+app-laptop/tuxedo-drivers dist-kernel
+net-im/discord appindicator
+media-video/obs-studio pipewire wayland alsa jack pulseaudio
+# required by media-video/obs-studio
+media-video/ffmpeg opus openh264
+
+kde-apps/kio-extras mtp
+
+#virt-manager
+app-emulation/virt-manager gui -apparmor
+net-misc/spice-gtk usbredir
+dev-libs/libtasn1 abi_x86_32
+dev-libs/libunistring abi_x86_32
+dev-libs/nettle abi_x86_32
+dev-libs/gmp abi_x86_32
+app-crypt/p11-kit abi_x86_32
+virtual/libintl abi_x86_32
+
+#veracrypt
+net-dns/libidn2 abi_x86_32
+media-libs/alsa-lib abi_x86_32
+sys-apps/dbus abi_x86_32
+x11-libs/libxkbcommon abi_x86_32
+x11-libs/libXcursor abi_x86_32
+x11-libs/libXi abi_x86_32
+virtual/libiconv abi_x86_32
+virtual/glu abi_x86_32
+virtual/libudev abi_x86_32
+sys-apps/systemd abi_x86_32
+sys-apps/util-linux abi_x86_32
+sys-libs/libcap abi_x86_32
+dev-libs/libgcrypt abi_x86_32
+app-arch/lz4 abi_x86_32
+sys-libs/pam abi_x86_32
+media-libs/glu abi_x86_32
+dev-libs/libgpg-error abi_x86_32
+
+# required by app-emulation/virt-manager
+net-dns/dnsmasq script
+net-libs/gnutls pkcs11 tools
+app-emulation/libvirt libvirtd apparmor firewalld qemu udev policykit
+app-emulation/qemu opengl pipewire spice virgl virtfs usbredir plugins pulseaudio
+app-emulation/spice gstreamer
+app-admin/keepassxc autotype
+net-wireless/blueman pulseaudio
+
+
+#lutris
+media-libs/vulkan-loader abi_x86_32
+media-libs/vulkan-layers abi_x86_32
+media-libs/freetype abi_x86_32
+media-libs/libpng abi_x86_32
+net-libs/gnutls abi_x86_32
+media-libs/libsdl2 abi_x86_32
+
+#steam (confinued)
+games-util/steam-launcher steamruntime
+
+x11-libs/extest abi_x86_32
+dev-libs/libevdev abi_x86_32
+virtual/rust abi_x86_32
+dev-lang/rust-bin abi_x86_32
+
+media-libs/fontconfig abi_x86_32
+sys-libs/libudev-compat abi_x86_32
+media-libs/libpulse abi_x86_32
+x11-drivers/nvidia-drivers abi_x86_32
+media-libs/libsndfile abi_x86_32
+net-libs/libasyncns abi_x86_32
+dev-libs/glib abi_x86_32
+dev-libs/libpcre2 abi_x86_32
+media-libs/flac abi_x86_32
+media-libs/libogg abi_x86_32
+media-libs/libvorbis abi_x86_32
+media-libs/opus abi_x86_32
+media-sound/lame abi_x86_32
+media-sound/mpg123-base abi_x86_32
+app-arch/xz-utils abi_x86_32
+
+app-editors/emacs tree-sitter
+
+#rofi
+gui-apps/rofi-wayland drun
+
+#compatibility with EAC for games
+sys-libs/glibc hash-sysv-compat
+
+#droidcam
+media-video/droidcam dist-kernel
+
+x11-libs/xcb-util-keysyms abi_x86_32
+
+#kernel
+sys-kernel/installkernel dracut grub -systemd
+
+#night light
+x11-misc/gammastep appindicator
+
+#latex for emacs pdf export
+app-text/texlive-core xetex
+
+#######################################
+#old flags
+#dev-libs/libdbusmenu gtk3
+#media-video/wireplumber systemd
+#media-sound/pulseaudio -daemon
+#media-libs/libcanberra alsa
+#x11-libs/cairo X
+#dev-cpp/gtkmm X
+#dev-cpp/cairomm X
+#media-libs/libglvnd X
+#dev-qt/qtgui dbus egl
+#x11-libs/libxkbcommon X
+#kde-frameworks/kwindowsystem X
+#kde-frameworks/kconfig dbus
+#dev-qt/qtcore icu
+#sys-apps/systemd policykit
+#app-text/ghostscript-gpl cups
+#media-sound/jack2 dbus
+#app-crypt/gcr gtk
+#net-wireless/wpa_supplicant dbus
+#dev-qt/qtdeclarative opengl
+#x11-terms/kitty wayland
+#sys-apps/xdg-desktop-portal-gtk wayland
+#app-text/xmlto text
+#dev-qt/qtmultimedia widgets
+#gui-wm/sway wallpapers
+
+#app-text/poppler nss
+#sys-apps/xdg-desktop-portal screencast
+
+#qtile
+x11-wm/qtile wayland
+x11-libs/cairo X glib opengl svg
