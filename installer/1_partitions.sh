@@ -12,12 +12,17 @@ lsblk -l
 echo "set install drive to: "
 read installDrive
 
+echo "Create partition table (only do this if no partition table exists!)"
+parted /dev/$installDrive mklabel gpt
+
+lsblk -l
+
 echo "efi partition"
-#parted /dev/$installDrive mkpart primary fat32 3MB 515MB
+parted /dev/$installDrive mkpart primary fat32 3MB 515MB
 read efiDrive
 
 echo "root partition"
-#parted /dev/$installDrive mkpart primary btrfs 2563MB 100%
+parted /dev/$installDrive mkpart primary btrfs 515MB 100%
 read rootDrive
 
 #echo "format partitions"
