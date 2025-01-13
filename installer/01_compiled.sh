@@ -63,7 +63,7 @@ mount --mkdir /dev/$efiDrive /mnt/boot/efi
 wget "https://distfiles.gentoo.org/releases/amd64/autobuilds/20250105T170325Z/stage3-amd64-desktop-systemd-20250105T170325Z.tar.xz" -P /mnt/
 
 echo "extract tarball"
-tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt
+tar xpvf /mnt/stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt
 
 ###############################################################
 # generate make.conf
@@ -91,7 +91,7 @@ USE=""
 MAKEOPTS="--jobs 14 --load-average 15"
 ACCEPT_LICENSE="@FREE @GPL-COMPATIBLE @BINARY-REDISTRIBUTABLE"
 GRUB_PLATFORMS="efi-64"
-VIDEO_CARDS="amdgpu radeonsi radeon nvidia"
+VIDEO_CARDS="amdgpu radeonsi radeon nvidia nouveau intel"
 FEATURES="${FEATURES} binpkg-request-signature"
 GRUB_PLATFORMS="efi-64"
 EOF
@@ -99,6 +99,8 @@ EOF
 echo "copy current dns info"
 cp --dereference /etc/resolv.conf /mnt/etc/
 
-cp /home/gentoo/gentoo/installer/02_chroot.sh /mnt/
+cp 02_chroot.sh /mnt/
+cp 03_install_basicsystem.sh /mnt/
+
 echo "enter chroot environment. Next step: run 02_chroot.sh"
 arch-chroot /mnt

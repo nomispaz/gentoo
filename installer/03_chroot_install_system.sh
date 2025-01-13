@@ -1,13 +1,11 @@
 #install system
-#emerge     kde-plasma/plasma-meta   
-emerge --update \
-kde-plasma/plasma-meta \
+# base system
+emerge --update --getbinpkg \
 sys-kernel/linux-firmware \
 sys-kernel/gentoo-kernel-bin \
 x11-terms/alacritty \
 kde-apps/ark \
 sys-fs/btrfs-progs \
-www-client/chromium \
 net-misc/chrony \
 sys-power/cpupower \
 kde-apps/dolphin \
@@ -18,18 +16,76 @@ net-firewall/firewalld \
 app-shells/fish \
 sys-apps/flatpak \
 dev-vcs/git \
+sys-apps/gnome-disk-utilities \
 sys-block/gparted \
 sys-boot/grub \
+gnome-base/gvfs \
+kde-apps/gwenview \
 sys-process/htop \
+kde-apps/kate \
+kde-apps/konsole \
+sys-apps/less \
+dev-util/meld \
 app-editors/neovim \
+kde-apps/okular \
 sys-boot/os-prober \
+net-misc/rclone \
+sys-apps/ripgrep \
+app-misc/screenfetch \
 app-backup/snapper \
 app-admin/sudo \
+app-admin/testdisk \
+media-fonts/dejavu \
+media-fonts/nerd-fonts-symbols \
 app-editors/vim \
+net-misc/wget \
+x11-drivers/xf86-input-synaptics \
+sys-fs/xfsprogs \
+x11-misc/xdg-user-dirs \
+x11-misc/xdg-utils \
 net-misc/dhcpcd \
 net-wireless/iwd \
 net-misc/networkmanager \
 net-wireless/wpa_supplicant
+
+#security
+emerge --ask --update --getbinpkg \
+sys-apps/apparmor \
+sec-policy/apparmor-profiles \
+app-antivirus/clamav \
+app-forensics/rkhunter
+
+# networking
+emerge --ask --update --getbinpkg \
+
+# kde plasme
+emerge --update --getbinpkg \
+kde-plasma/plasma-meta \
+x11-misc/sddm
+
+# additional programs
+emerge --update --getbinpkg \
+app-crypt/veracrypt \
+app-emulation/virt-manager \
+app-emulation/virtiofsd \
+app-text/calibre \
+net-misc/yt-dlp \
+app-admin/keepassxc \
+app-office/libreoffice \
+media-video/obs-studio \
+mail-client/thunderbird \
+media-sound/asunder
+
+#emacs
+emerge --update --getbinpkg \
+app-editors/emacs \
+app-emacs/yasnippet \
+app-emacs/yasnippet-snippets \
+app-emacs/company-mode \
+app-emacs/consult \
+app-emacs/go-mode \
+app-emacs/rust-mode \
+app-emacs/evil
 
 dracut -f
 
@@ -66,7 +122,7 @@ usermod -aG sys,wheel,users,rfkill,pipewire,$user $user
 passwd $user
 
 echo "Defaults targetpw # Ask for the password of the target user" >> /etc/sudoers
-echo "$user ALL=(ALL:ALL) ALL" >> /etc/sudoers
+echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
 
 echo "Enable Services"
 systemctl enable systemd-networkd.service
@@ -99,6 +155,5 @@ chmod 750 /.snapshots/
 sudo mkdir -p /etc/pipewire
 sudo cp /usr/share/pipewire/pipewire.conf /etc/pipewire/pipewire.conf
 
-echo "next steps: check fstab, cd, umount -l /mnt/gentoo/dev{/shm,/pts,}, umount -R /mnt/gentoo, reboot"
+echo "next step: reboot"
 exit
-fi

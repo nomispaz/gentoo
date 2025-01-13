@@ -15,7 +15,7 @@ echo "UUID=$rootDrive /data btrfs defaults,noatime,compress=zstd,subvol=data 0 0
 echo "UUID=$rootDrive /var btrfs defaults,noatime,compress=zstd,subvol=var 0 0" >> /etc/fstab
 echo "UUID=$rootDrive /.snapshots btrfs defaults,noatime,compress=zstd,subvol=snapshots 0 0" >> /etc/fstab
 
-emerge --ask --getbinpkg app-eselect/eselect-repository
+emerge --getbinpkg app-eselect/eselect-repository
 
 #currently no checkup of installation profiles. default for the stage-tarball is used"
 # eselect profile list
@@ -47,14 +47,41 @@ echo "LC_NUMERIC=de_DE.UTF-8" >> /etc/locale.conf
 echo "LC_TIME=de_DE.UTF-8" >> /etc/locale.conf
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen
-echo "KEYMAP=de-latin1" >> /etc/vconsole.conf
-echo "KEYMAP=de-latin1" >> /etc/conf.d/keymaps
+echo "KEYMAP=de-latin1" > /etc/vconsole.conf
+echo 'KEYMAP="de-latin1"' > /etc/conf.d/keymaps
 echo "XMGgentoo" >> /etc/hostname
 locale-gen
 
-echo "set CPU_FLAGS"
-emerge --getbinpkg app-portage/cpuid2cpuflags
-echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+echo "set keyboard layout for sddm"
+cat <<EOF >/etc/X11/xorg.conf.d/00-keyboard.conf
+# Written by systemd-localed(8), read by systemd-localed and Xorg. It's
+# probably wise not to edit this file manually. Use localectl(1) to
+# instruct systemd-localed to update it.
+Section "InputClass"
+        Identifier "system-keyboard"
+        MatchIsKeyboard "on"
+        Option "XkbLayout" "de"
+        Option "XkbModel" "microsoftpro"
+        Option "XkbVariant" "nodeadkeys"
+        Option "XkbOptions" "terminate:ctrl_alt_bksp"
+EndSection
+EOF
+
+#echo "set CPU_FLAGS"
+#emerge --getbinpkg app-portage/cpuid2cpuflags
+#echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+
+echo "set use-flags"
+echo "sys-kernel/installkernel dracut grub -systemd" >> /etc/portage/package.use/kernel
+echo "sys-boot/grub mount" >> /etc/portage/package.use/grub
+# to enable binary package of the package
+echo "dev-qt/qtcore -icu" >> /etc/portage/package.use/qt
+echo "dev-qt/qtbase -cups -gtk -icu -libproxy -mysql -opengl -vulkan -wayland" >> /etc/portage/package.use/qt
+echo "dev-qt/pyqt6 quick" >> /etc/portage/package.use/qt
+echo "dev-libs/libxml2 -icu" >> /etc/portage/package.use/libxml
+echo "media-libs/harfbuzz -icu" >> /etc/portage/package.use/harfbuzz
+echo "gui-libs/gtk -cpu_flags_x86_f16c" >> /etc/portage/package.use/gtk
+echo "dev-libs/boost -icu" >> /etc/portage/package.use/boost
 
 echo "configuring dracut"
 mkdir -p /etc/dracut.conf.d/
