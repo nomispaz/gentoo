@@ -53,6 +53,7 @@ echo "XMGgentoo" >> /etc/hostname
 locale-gen
 
 echo "set keyboard layout for sddm"
+touch /etc/X11/xorg.conf.d/00-keyboard.conf
 cat <<EOF >/etc/X11/xorg.conf.d/00-keyboard.conf
 # Written by systemd-localed(8), read by systemd-localed and Xorg. It's
 # probably wise not to edit this file manually. Use localectl(1) to
@@ -82,6 +83,22 @@ echo "dev-libs/libxml2 -icu" >> /etc/portage/package.use/libxml
 echo "media-libs/harfbuzz -icu" >> /etc/portage/package.use/harfbuzz
 echo "gui-libs/gtk -cpu_flags_x86_f16c" >> /etc/portage/package.use/gtk
 echo "dev-libs/boost -icu" >> /etc/portage/package.use/boost
+echo "sys-process/lsof rpc" >> /etc/portage/package.use/lsof
+echo "app-admin/testdisk -gui -jpeg" >> /etc/portage/package.use/testdisk
+echo "sys-fs/xfsprogs -icu" >> /etc/portage/package.use/xfsprogs
+echo "mail-client/thunderbird lto" >> /etc/portage/package.use/thunderbird
+echo "media-video/ffmpeg opus" >> /etc/portage/package.use/ffmpeg
+echo "net-libs/nodejs -inspector" >> /etc/portage/package.use/nodejs
+echo "dev-qt/qtwebengine bindist" >> /etc/portage/package.use/qt
+echo "net-libs/gnutls tools pkcs11" >> /etc/portage/package.use/gnutls
+echo "net-misc/spice-gtk usbredir" >> /etc/portage/package.use/spice-gtk
+echo "net-dns/dnsmasq script" >> /etc/portage/package.use/dnsmasq
+
+
+# testing branch
+echo "media-video/obs-studio ~amd64" >> /etc/portage/package.accept_keywords/obs-studio
+# personal repo
+echo "media-fonts/nerd-fonts-symbols ~amd64" >> /etc/portage/package.accept_keywords/fonts
 
 echo "configuring dracut"
 mkdir -p /etc/dracut.conf.d/

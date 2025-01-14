@@ -16,7 +16,7 @@ net-firewall/firewalld \
 app-shells/fish \
 sys-apps/flatpak \
 dev-vcs/git \
-sys-apps/gnome-disk-utilities \
+sys-apps/gnome-disk-utility \
 sys-block/gparted \
 sys-boot/grub \
 gnome-base/gvfs \
@@ -42,11 +42,7 @@ net-misc/wget \
 x11-drivers/xf86-input-synaptics \
 sys-fs/xfsprogs \
 x11-misc/xdg-user-dirs \
-x11-misc/xdg-utils \
-net-misc/dhcpcd \
-net-wireless/iwd \
-net-misc/networkmanager \
-net-wireless/wpa_supplicant
+x11-misc/xdg-utils
 
 #security
 emerge --ask --update --getbinpkg \
@@ -57,8 +53,12 @@ app-forensics/rkhunter
 
 # networking
 emerge --ask --update --getbinpkg \
+net-misc/dhcpcd \
+net-wireless/iwd \
+net-misc/networkmanager \
+net-wireless/wpa_supplicant
 
-# kde plasme
+# kde plasma
 emerge --update --getbinpkg \
 kde-plasma/plasma-meta \
 x11-misc/sddm
