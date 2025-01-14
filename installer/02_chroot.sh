@@ -77,9 +77,7 @@ echo "sys-kernel/installkernel dracut grub -systemd" >> /etc/portage/package.use
 echo "sys-boot/grub mount" >> /etc/portage/package.use/grub
 # to enable binary package of the package
 echo "dev-qt/qtcore -icu" >> /etc/portage/package.use/qt
-echo "dev-qt/qtbase -cups -gtk -icu -libproxy -mysql -opengl -vulkan -wayland" >> /etc/portage/package.use/qt
 echo "dev-qt/pyqt6 quick" >> /etc/portage/package.use/qt
-echo "dev-libs/libxml2 -icu" >> /etc/portage/package.use/libxml
 echo "media-libs/harfbuzz -icu" >> /etc/portage/package.use/harfbuzz
 echo "gui-libs/gtk -cpu_flags_x86_f16c" >> /etc/portage/package.use/gtk
 echo "dev-libs/boost -icu" >> /etc/portage/package.use/boost

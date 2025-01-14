@@ -1,6 +1,6 @@
 #install system
 # base system
-emerge --update --getbinpkg \
+emerge --ask --update --getbinpkg \
 sys-kernel/linux-firmware \
 sys-kernel/gentoo-kernel-bin \
 x11-terms/alacritty \
@@ -36,48 +36,32 @@ app-backup/snapper \
 app-admin/sudo \
 app-admin/testdisk \
 media-fonts/dejavu \
-media-fonts/nerd-fonts-symbols \
 app-editors/vim \
 net-misc/wget \
 x11-drivers/xf86-input-synaptics \
 sys-fs/xfsprogs \
 x11-misc/xdg-user-dirs \
-x11-misc/xdg-utils
-
-#security
-emerge --ask --update --getbinpkg \
+x11-misc/xdg-utils \
 sys-apps/apparmor \
 sec-policy/apparmor-profiles \
 app-antivirus/clamav \
-app-forensics/rkhunter
-
-# networking
-emerge --ask --update --getbinpkg \
+app-forensics/rkhunter \
 net-misc/dhcpcd \
 net-wireless/iwd \
 net-misc/networkmanager \
-net-wireless/wpa_supplicant
-
-# kde plasma
-emerge --update --getbinpkg \
+net-wireless/wpa_supplicant \
 kde-plasma/plasma-meta \
-x11-misc/sddm
-
-# additional programs
-emerge --update --getbinpkg \
+x11-misc/sddm \
 app-crypt/veracrypt \
 app-emulation/virt-manager \
 app-emulation/virtiofsd \
 app-text/calibre \
 net-misc/yt-dlp \
 app-admin/keepassxc \
-app-office/libreoffice \
+app-office/libreoffice-bin \
 media-video/obs-studio \
 mail-client/thunderbird \
-media-sound/asunder
-
-#emacs
-emerge --update --getbinpkg \
+media-sound/asunder \
 app-editors/emacs \
 app-emacs/yasnippet \
 app-emacs/yasnippet-snippets \
