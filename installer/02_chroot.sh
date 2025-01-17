@@ -14,6 +14,12 @@ echo "UUID=$rootDrive /home btrfs defaults,noatime,compress=zstd,subvol=home 0 0
 echo "UUID=$rootDrive /data btrfs defaults,noatime,compress=zstd,subvol=data 0 0" >> /etc/fstab
 echo "UUID=$rootDrive /var btrfs defaults,noatime,compress=zstd,subvol=var 0 0" >> /etc/fstab
 echo "UUID=$rootDrive /.snapshots btrfs defaults,noatime,compress=zstd,subvol=snapshots 0 0" >> /etc/fstab
+echo "UUID=$rootDrive /swap btrfs defaults,noatime,compress=zstd,subvol=swap 0 0" >> /etc/fstab
+echo "/swap/swapfile      	none      	swap      	defaults  	0 0" >> /etc/fstab
+
+# necessary at this point so that the profile selection works
+echo "update ebuild repo"
+emerge --sync
 
 emerge --getbinpkg app-eselect/eselect-repository
 
@@ -28,14 +34,15 @@ eselect repository add gentoo_localrepo git https://github.com/nomispaz/gentoo_l
 echo "add steam repo"
 eselect repository enable steam-overlay
 
-echo "update ebuild repo"
-emerge --sync
+#add brave-overlay
+eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
 
 echo "enable specific licenses"
 cat <<EOF > /etc/portage/package.license
 net-im/discord all-rights-reserved
 app-crypt/veracrypt truecrypt-3.0
 games-util/steam-launcher ValveSteamLicense
+dev-util/nvidia-cuda-toolkit NVIDIA-CUDA
 EOF
 
 echo "set locales and time"
@@ -53,6 +60,7 @@ echo "XMGgentoo" >> /etc/hostname
 locale-gen
 
 echo "set keyboard layout for sddm"
+mkdir -p /etc/X11/xorg.conf.d/
 touch /etc/X11/xorg.conf.d/00-keyboard.conf
 cat <<EOF >/etc/X11/xorg.conf.d/00-keyboard.conf
 # Written by systemd-localed(8), read by systemd-localed and Xorg. It's
@@ -68,6 +76,38 @@ Section "InputClass"
 EndSection
 EOF
 
+### NVIDIA patches ###
+echo "wlroots-patch for nvidia"
+mkdir -p /etc/portage/patches/gui-libs/wlroots/
+cat <<EOF > /etc/portage/patches/gui-libs/wlroots/nvidia.patch
+--- a/render/gles2/pass.c	2023-12-21 13:42:26.000000000 -0500
++++ b/render/gles2/pass.c	2024-02-26 22:47:46.731134932 -0500
+@@ -36,7 +36,7 @@
+ 		clock_gettime(CLOCK_MONOTONIC, &timer->cpu_end);
+ 	}
+
+-	glFlush();
++	glFinish();
+ 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+ 	pop_gles2_debug(renderer);
+EOF
+
+echo "sway-patch for nvidia"
+mkdir -p /etc/portage/patches/gui-wm/sway/
+cat <<EOF > /etc/portage/patches/gui-wm/sway/nvidia.patch
+--- a/sway.desktop	2025-01-16 07:45:40.038682656 +0100
++++ b/sway.desktop	2025-01-16 07:47:34.292733051 +0100
+@@ -1,5 +1,5 @@
+ [Desktop Entry]
+ Name=Sway
+ Comment=An i3-compatible Wayland compositor
+-Exec=/usr/local/bin/sway-nvidia.sh
++Exec=sway
+ Type=Application
+EOF
+
+
 #echo "set CPU_FLAGS"
 #emerge --getbinpkg app-portage/cpuid2cpuflags
 #echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
@@ -75,10 +115,8 @@ EOF
 echo "set use-flags"
 echo "sys-kernel/installkernel dracut grub -systemd" >> /etc/portage/package.use/kernel
 echo "sys-boot/grub mount" >> /etc/portage/package.use/grub
-# to enable binary package of the package
-echo "dev-qt/qtcore -icu" >> /etc/portage/package.use/qt
-echo "dev-qt/pyqt6 quick" >> /etc/portage/package.use/qt
-echo "media-libs/harfbuzz -icu" >> /etc/portage/package.use/harfbuzz
+echo "dev-python/pyqt6 gui network opengl printsupport quick svg widgets" >> /etc/portage/package.use/qt
+echo "media-libs/harfbuzz icu graphite" >> /etc/portage/package.use/harfbuzz
 echo "gui-libs/gtk -cpu_flags_x86_f16c" >> /etc/portage/package.use/gtk
 echo "dev-libs/boost -icu" >> /etc/portage/package.use/boost
 echo "sys-process/lsof rpc" >> /etc/portage/package.use/lsof
@@ -91,12 +129,21 @@ echo "dev-qt/qtwebengine bindist" >> /etc/portage/package.use/qt
 echo "net-libs/gnutls tools pkcs11" >> /etc/portage/package.use/gnutls
 echo "net-misc/spice-gtk usbredir" >> /etc/portage/package.use/spice-gtk
 echo "net-dns/dnsmasq script" >> /etc/portage/package.use/dnsmasq
-
+echo "app-containers/docker cuda btrfs" >> /etc/portage/package.use/docker
+echo "app-containers/containerd btrfs" >> /etc/portage/package.use/docker
+echo "dev-lang/rust-bin rust-analyzer rustfmt" >> /etc/portage/package.use/rust
+echo "app-emulation/qemu spice pulseaudio" >> /etc/portage/package.use/qemu
+echo "app-emulation/libvirt firewalld" >> /etc/portage/package.use/libvirt
 
 # testing branch
 echo "media-video/obs-studio ~amd64" >> /etc/portage/package.accept_keywords/obs-studio
 # personal repo
 echo "media-fonts/nerd-fonts-symbols ~amd64" >> /etc/portage/package.accept_keywords/fonts
+echo "app-forensics/lynis ~amd64" >> /etc/portage/package.accept_keywords/lynis
+echo "dev-libs/libpthread-stubs **" >> /etc/portage/package.accept_keywords/brave
+
+echo "update ebuild repo"
+emerge --sync
 
 echo "configuring dracut"
 mkdir -p /etc/dracut.conf.d/
